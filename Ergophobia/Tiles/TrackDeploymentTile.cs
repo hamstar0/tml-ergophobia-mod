@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -12,7 +13,7 @@ namespace Ergophobia.Tiles {
 		public static void DeployAt( int i, int j, bool isFacingRight, int fromPlayerWho ) {
 			Main.tile[i, j].ClearTile();
 
-			if( Main.netMode == 2 ) {
+			if( Main.netMode == NetmodeID.Server ) {
 				NetMessage.SendTileSquare( -1, i, j, 1 );
 			}
 

@@ -1,10 +1,23 @@
 ﻿using System;
+using Terraria.ID;
 using HamstarHelpers.Classes.Loadable;
 using HamstarHelpers.Services.Hooks.ExtendedHooks;
 
 
 namespace Ergophobia {
 	class ErgophobiaTileLoadable : ILoadable {
+		public static bool CanPlaceOther( int i, int j, int type ) {
+			if( ErgophobiaConfig.Instance.TilePlaceWhitelist.Contains( TileID.GetUniqueKey( type ) ) ) {
+				return true;
+			}
+
+			return false;
+		}
+
+
+
+		////////////////
+
 		public bool IsCreatingHouse { get; private set; }
 
 

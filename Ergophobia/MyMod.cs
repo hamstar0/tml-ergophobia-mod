@@ -12,7 +12,7 @@ using Ergophobia.Recipes;
 
 
 namespace Ergophobia {
-	public class ErgophobiaMod : Mod {
+	public partial class ErgophobiaMod : Mod {
 		public static string GithubUserName => "hamstar0";
 		public static string GithubProjectName => "tml-ergophobia-mod";
 
