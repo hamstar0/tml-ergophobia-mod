@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using HamstarHelpers.Helpers.Debug;
 using Ergophobia.Items;
 
 
@@ -15,12 +16,15 @@ namespace Ergophobia {
 			//
 
 			void addToShop( int itemType, ref int myNextSlot ) {
+				if( myNextSlot >= shop.item.Length ) {
+					LogHelpers.Alert( "Merchant shop could not finish setup." );
+					return;
+				}
+				
 				var newItem = new Item();
 				newItem.SetDefaults( itemType );
-
-				if( myNextSlot < shop.item.Length ) {
-					shop.item[ myNextSlot++ ] = newItem;
-				}
+				
+				shop.item[ myNextSlot++ ] = newItem;
 			}
 
 			//

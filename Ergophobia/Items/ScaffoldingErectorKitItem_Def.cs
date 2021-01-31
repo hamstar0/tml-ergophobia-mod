@@ -27,8 +27,8 @@ namespace Ergophobia.Items {
 		}
 
 		public override void SetDefaults() {
-			this.item.width = HouseFramingKitItem.ItemWidth;
-			this.item.height = HouseFramingKitItem.ItemHeight;
+			this.item.width = ScaffoldingErectorKitItem.ItemWidth;
+			this.item.height = ScaffoldingErectorKitItem.ItemHeight;
 			this.item.consumable = true;
 			this.item.useStyle = ItemUseStyleID.HoldingUp;
 			this.item.useTime = 30;
