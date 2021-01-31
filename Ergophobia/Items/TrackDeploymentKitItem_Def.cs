@@ -21,7 +21,8 @@ namespace Ergophobia.Items {
 		////////////////
 
 		public override void SetStaticDefaults() {
-			int tracks = ErgophobiaConfig.Instance.Get<int>( nameof(ErgophobiaConfig.TrackDeploymentKitTracks) );
+			var config = ErgophobiaConfig.Instance;
+			int tracks = config.Get<int>( nameof(config.TrackDeploymentKitTracks) );
 
 			this.DisplayName.SetDefault( "Track Deployment Kit" );
 			this.Tooltip.SetDefault( "Unfurls a spool of train tracks in the direction you're facing"
@@ -31,7 +32,7 @@ namespace Ergophobia.Items {
 		}
 
 		public override void SetDefaults() {
-			int tracks = ErgophobiaConfig.Instance.Get<int>( nameof(ErgophobiaConfig.TrackDeploymentKitTracks) );
+			var config = ErgophobiaConfig.Instance;
 
 			this.item.width = TrackDeploymentKitItem.ItemWidth;
 			this.item.height = TrackDeploymentKitItem.ItemHeight;
@@ -44,7 +45,7 @@ namespace Ergophobia.Items {
 			this.item.consumable = true;
 			this.item.createTile = ModContent.TileType<TrackDeploymentTile>();
 			this.item.placeStyle = 0;
-			this.item.value = tracks * 100;
+			this.item.value = config.Get<int>( nameof(config.TrackKitPrice) );
 			//this.item.UseSound = SoundID.Item108;
 			this.item.rare = ItemRarityID.Green;
 		}

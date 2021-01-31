@@ -14,6 +14,19 @@ namespace Ergophobia {
 
 		////
 
+		[DefaultValue( true )]
+		public bool HouseFramingKitSoldByMerchant { get; set; } = true;
+
+		[DefaultValue( true )]
+		public bool HouseFurnishingKitSoldByMerchant { get; set; } = true;
+
+		[DefaultValue( true )]
+		public bool ScaffoldingKitSoldByMerchant { get; set; } = true;
+
+		[DefaultValue( true )]
+		public bool TrackKitSoldByMerchant { get; set; } = true;
+
+
 		[Range(0, 99999999 )]
 		[DefaultValue( 100000 )]
 		public int HouseFramingKitPrice { get; set; } = 100000; //Item.buyPrice( 0, 10, 0, 0 );
@@ -24,8 +37,13 @@ namespace Ergophobia {
 
 		[Range( 0, 99999999 )]
 		[DefaultValue( 15000 )]
-		public int ScaffoldingKitPrice { get; set; } = Item.buyPrice( 0, 1, 50, 0 );
+		public int ScaffoldingKitPrice { get; set; } = 15000;	//Item.buyPrice( 0, 1, 50, 0 );
 
+		[Range( 0, 99999999 )]
+		[DefaultValue( 15000 )]
+		public int TrackKitPrice { get; set; } = 15000;	//Item.buyPrice( 0, 1, 50, 0 );
+
+		//
 
 		[DefaultValue( true )]
 		public bool TrackDeploymentKitEnabled { get; set; } = true;
