@@ -36,12 +36,17 @@ namespace Ergophobia.Items {
 				return false;
 			}
 
+			floorTileY--;
+
 			area = new Rectangle( leftTileX, floorTileY, width, height );
 
-			// Enure clear space
+			// Ensure clear space
 			for( int j = 0; j < height; j++ ) {
 				for( int i = 0; i < width; i++ ) {
-					if( Main.tile[i, j].active() ) {
+					int x = i + area.X;
+					int y = j + area.Y;
+
+					if( Main.tile[x, y]?.active() == true ) {
 						return false;
 					}
 				}
@@ -55,29 +60,24 @@ namespace Ergophobia.Items {
 			int width = ScaffoldingErectorKitItem.ScaffoldWidth;
 			int height = ScaffoldingErectorKitItem.ScaffoldHeight;
 			int maxX = leftTileX + width;
-			int maxY = floorTileY + (height * 3);
+			int maxY = floorTileY + (height * 2) + 1;
 			int framingPlankType = ModContent.TileType<FramingPlankTile>();
 
-			bool foundGround = false;
-
+			// Find at least one 'earth' tile beneath
 			for( int x=leftTileX; x<maxX; x++ ) {
-				foundGround = false;
-
 				for( int y=floorTileY; y<maxY; y++ ) {
 					Tile tile = Main.tile[x, y];
+					if( tile?.active() != true ) {
+						continue;
+					}
 
 					if( TileHelpers.IsSolid(tile, false, false) && tile.type != framingPlankType ) {
-						foundGround = true;
-						break;
+						return true;
 					}
-				}
-
-				if( !foundGround ) {
-					break;
 				}
 			}
 
-			return foundGround;
+			return false;
 		}
 	}
 }

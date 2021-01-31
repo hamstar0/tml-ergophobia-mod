@@ -70,6 +70,8 @@ namespace Ergophobia {
 					this.CheckFrameableHouse();
 				} else if( heldItemType == ModContent.ItemType<TrackDeploymentKitItem>() ) {
 					this.CheckTrackKitResume( heldItemType );
+				} else if( heldItemType == ModContent.ItemType<ScaffoldingErectorKitItem>() ) {
+					this.CheckScaffoldArea();
 				}
 			}
 		}

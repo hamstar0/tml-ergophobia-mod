@@ -26,14 +26,20 @@ namespace Ergophobia.Items {
 				height - 1
 			);
 
-			var postTileDef = new TileDrawDefinition { WallType = WallID.RichMahoganyFence };
-			var platTileDef = new TileDrawDefinition { TileType = TileID.Platforms };
+			var postTileDef = new TileDrawDefinition {
+				NotActive = true,
+				WallType = WallID.RichMahoganyFence
+			};
+			var platTileDef = new TileDrawDefinition {
+				SkipWall = true,
+				TileType = TileID.Platforms
+			};
 
 			//
 
 			TileDrawPrimitivesHelpers.DrawRectangle(
 				filter: TilePattern.NonActive,
-				area: rect,
+				area: new Rectangle( rect.X, rect.Y + 1, rect.Width, rect.Height - 1 ),
 				hollow: hollow,
 				place: ( x, y ) => postTileDef
 			);
