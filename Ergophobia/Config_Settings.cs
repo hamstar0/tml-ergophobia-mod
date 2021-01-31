@@ -22,6 +22,10 @@ namespace Ergophobia {
 		[DefaultValue( 100000 )]
 		public int HouseFurnishingKitPrice { get; set; } = 100000;  //Item.buyPrice( 0, 10, 0, 0 );
 
+		[Range( 0, 99999999 )]
+		[DefaultValue( 15000 )]
+		public int ScaffoldingKitPrice { get; set; } = Item.buyPrice( 0, 1, 50, 0 );
+
 
 		[DefaultValue( true )]
 		public bool TrackDeploymentKitEnabled { get; set; } = true;

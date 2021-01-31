@@ -10,11 +10,11 @@ using HamstarHelpers.Helpers.Tiles.Draw;
 
 namespace Ergophobia.Items {
 	public partial class HouseFramingKitItem : ModItem {
-		private static void MakeHouseSupports( Rectangle rect, int tileY ) {
-			var supportLeft = new Rectangle( rect.X, tileY, 1, 256 );
-			var supportRight = new Rectangle( rect.X + rect.Width - 1, tileY, 1, 256 );
-			int floorLeft = tileY + 256;
-			int floorRight = tileY + 256;
+		private static void MakeHouseSupports( Rectangle rect, int floorTileY ) {
+			var supportLeft = new Rectangle( rect.X, floorTileY, 1, 256 );
+			var supportRight = new Rectangle( rect.X + rect.Width - 1, floorTileY, 1, 256 );
+			int floorLeft = floorTileY + 256;
+			int floorRight = floorTileY + 256;
 
 			var woodBeamDef = new TileDrawDefinition { TileType = TileID.WoodenBeam };
 
@@ -69,7 +69,7 @@ namespace Ergophobia.Items {
 				place: placeSupportRight
 			);
 
-			if( Main.netMode == 2 ) {
+			if( Main.netMode == NetmodeID.Server ) {
 				NetMessage.SendTileRange(
 					whoAmi: -1,
 					tileX: supportLeft.X,

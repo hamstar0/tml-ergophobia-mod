@@ -10,22 +10,32 @@ using HamstarHelpers.Helpers.Tiles;
 
 namespace Ergophobia.Items {
 	public partial class HouseFramingKitItem : ModItem {
-		public static bool Validate( ref int tileX, ref int tileY, out ISet<(int, int)> tiles ) {
+		public static bool Validate( ref int leftTileX, ref int floorTileY, out ISet<(int, int)> tiles ) {
 			int width = HouseFramingKitItem.FrameWidth;
 			int height = HouseFramingKitItem.FrameHeight;
 			var myTiles = new HashSet<(int, int)>();
 
-			while( !TileHelpers.IsSolid( Main.tile[tileX, tileY], true, true ) ) {
-				tileY++;
-				if( tileY >= Main.maxTilesY ) {
+			int dropped = 0;
+
+			// Find ground
+			while( !TileHelpers.IsSolid( Main.tile[leftTileX, floorTileY], true, true ) ) {
+				floorTileY++;
+				dropped++;
+
+				if( floorTileY >= Main.maxTilesY ) {
 					tiles = myTiles;
 					return false;
 				}
 			}
 
+			if( dropped > height ) {
+				tiles = myTiles;
+				return false;
+			}
+
 			var outerRect = new Rectangle(
-				tileX - (width / 2),
-				tileY - height,
+				leftTileX - (width / 2),
+				floorTileY - height,
 				width,
 				height
 			);

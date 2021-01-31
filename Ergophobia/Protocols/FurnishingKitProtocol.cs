@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
@@ -11,7 +11,7 @@ using Ergophobia.Items;
 namespace Ergophobia.Protocols {
 	class FurnishingKitProtocol : PacketProtocolSendToServer {
 		public static void SendToServer( Player player, int tileX, int tileY ) {
-			if( Main.netMode != 1 ) { throw new ModHelpersException( "Not client" ); }
+			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModHelpersException( "Not client" ); }
 
 			var protocol = new FurnishingKitProtocol( player, tileX, tileY );
 			protocol.SendToServer( false );

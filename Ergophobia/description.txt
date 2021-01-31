@@ -1,4 +1,5 @@
 Supplies items that can quickly transform a given, properly shaped (and located) closed space into a livable house with some amenities.
 
 Credits:
-	RoboticTea - Sprites
+	RoboticTea - Item sprites
+	Arci - Item sprites

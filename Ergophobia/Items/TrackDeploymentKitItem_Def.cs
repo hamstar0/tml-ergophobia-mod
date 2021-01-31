@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Ergophobia.Tiles;
 
@@ -39,13 +40,13 @@ namespace Ergophobia.Items {
 			//this.item.autoReuse = true;
 			this.item.useAnimation = 15;
 			this.item.useTime = 10;
-			this.item.useStyle = 1;
+			this.item.useStyle = ItemUseStyleID.SwingThrow;
 			this.item.consumable = true;
 			this.item.createTile = ModContent.TileType<TrackDeploymentTile>();
 			this.item.placeStyle = 0;
 			this.item.value = tracks * 100;
 			//this.item.UseSound = SoundID.Item108;
-			this.item.rare = 2;
+			this.item.rare = ItemRarityID.Green;
 		}
 
 

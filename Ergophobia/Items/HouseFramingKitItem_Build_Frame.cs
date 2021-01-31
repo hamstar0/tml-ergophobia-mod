@@ -10,12 +10,12 @@ using HamstarHelpers.Helpers.Tiles.Draw;
 
 namespace Ergophobia.Items {
 	public partial class HouseFramingKitItem : ModItem {
-		public static void MakeHouseFrame( int tileX, int tileY ) {
+		public static void MakeHouseFrame( int leftTileX, int floorTileY ) {
 			int width = HouseFramingKitItem.FrameWidth;
 			int height = HouseFramingKitItem.FrameHeight;
 			var outerRect = new Rectangle(
-				tileX - (width / 2),
-				tileY - height,
+				leftTileX - (width / 2),
+				floorTileY - height,
 				width,
 				height
 			);
@@ -90,11 +90,11 @@ Timers.SetTimer( "HFK0_"+x+"_"+y, 2, false, () => {
 				place: getTileFeatureAt
 			);
 				
-			if( Main.netMode == 2 ) {
+			if( Main.netMode == NetmodeID.Server ) {
 				NetMessage.SendTileRange(
 					whoAmi: -1,
 					tileX: outerRect.X,
-					tileY: outerRect.Y ,
+					tileY: outerRect.Y,
 					xSize: outerRect.Width,
 					ySize: outerRect.Height
 				);
@@ -102,9 +102,7 @@ Timers.SetTimer( "HFK0_"+x+"_"+y, 2, false, () => {
 
 			//
 
-			if( Main.netMode == 0 ) {
-				HouseFramingKitItem.MakeHouseSupports( outerRect, tileY );
-			}
+			HouseFramingKitItem.MakeHouseSupports( outerRect, floorTileY );
 		}
 	}
 }

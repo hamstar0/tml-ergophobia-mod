@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using HamstarHelpers.Helpers.Debug;
@@ -9,11 +8,11 @@ using Ergophobia.Items;
 
 
 namespace Ergophobia.Protocols {
-	class FramingKitProtocol : PacketProtocolSendToServer {
-		public static void SendToServer( int tileX, int tileY ) {
+	class ScaffoldingKitProtocol : PacketProtocolSendToServer {
+		public static void SendToServer( int leftTileX, int floorTileY ) {
 			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModHelpersException( "Not client" ); }
 
-			var protocol = new FramingKitProtocol(  tileX, tileY );
+			var protocol = new ScaffoldingKitProtocol(  leftTileX, floorTileY );
 			protocol.SendToServer( false );
 		}
 
@@ -21,18 +20,18 @@ namespace Ergophobia.Protocols {
 
 		////////////////
 
-		public int TileX;
-		public int TileY;
+		public int LeftTileX;
+		public int FloorTileY;
 
 
 
 		////////////////
 
-		private FramingKitProtocol() { }
+		private ScaffoldingKitProtocol() { }
 
-		private FramingKitProtocol( int tileX, int tileY ) {
-			this.TileX = tileX;
-			this.TileY = tileY;
+		private ScaffoldingKitProtocol( int leftTileX, int floorTileY ) {
+			this.LeftTileX = leftTileX;
+			this.FloorTileY = floorTileY;
 		}
 
 		protected override void InitializeClientSendData() {
@@ -41,11 +40,10 @@ namespace Ergophobia.Protocols {
 		////
 
 		protected override void Receive( int fromWho ) {
-			ISet<(int TileX, int TileY)> houseTiles;
-			bool isValid = HouseFramingKitItem.Validate( ref this.TileX, ref this.TileY, out houseTiles );
+			bool isValid = ScaffoldingErectorKitItem.Validate( ref this.LeftTileX, ref this.FloorTileY, out _ );
 
 			if( isValid ) {
-				HouseFramingKitItem.MakeHouseFrame( this.TileX, this.TileY );
+				ScaffoldingErectorKitItem.MakeScaffold( this.LeftTileX, this.FloorTileY );
 			} else {
 				LogHelpers.Alert( "Could not place house frame" );
 			}

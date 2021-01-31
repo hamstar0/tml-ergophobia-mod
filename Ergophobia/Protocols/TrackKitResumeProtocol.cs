@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.ID;
 using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
 using HamstarHelpers.Helpers.Debug;
@@ -9,7 +10,7 @@ using Ergophobia.Items;
 namespace Ergophobia.Protocols {
 	class TrackKitResumeProtocol : PacketProtocolSendToClient {
 		public static void SendToClient( int fromPlayerWho, int tileX, int tileY, bool isAimedRight ) {
-			if( Main.netMode != 2 ) { throw new ModHelpersException( "Not server" ); }
+			if( Main.netMode != NetmodeID.Server ) { throw new ModHelpersException( "Not server" ); }
 
 			var protocol = new TrackKitResumeProtocol( fromPlayerWho, tileX, tileY, isAimedRight );
 
