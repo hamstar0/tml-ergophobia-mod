@@ -2,49 +2,49 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
+using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Tiles;
 using Ergophobia.Tiles;
 
 
 namespace Ergophobia.Items {
 	public partial class ScaffoldingErectorKitItem : ModItem {
-		public static bool Validate( ref int leftTileX, ref int floorTileY, out Rectangle area ) {
+		public static bool Validate( int tileX, int tileY, out Rectangle area ) {
 			int width = ScaffoldingErectorKitItem.ScaffoldWidth;
 			int height = ScaffoldingErectorKitItem.ScaffoldHeight;
+			int leftTileX = Math.Max( tileX - (width / 2), 1 );
+			int floorTileY = ScaffoldingErectorKitItem.FindScaffoldFloorY( leftTileX, tileY, width, height );
 
-			int dropped = 0;
-
-			// Find ground
-			while( !TileHelpers.IsSolid(Main.tile[leftTileX, floorTileY], true, false) ) {
-				floorTileY++;
-				dropped++;
-
-				if( floorTileY >= Main.maxTilesY ) {
-					area = new Rectangle();
-					return false;
-				}
-			}
-
-			if( dropped > height ) {
+			if( (floorTileY - tileY) > height ) {
 				area = new Rectangle();
 				return false;
 			}
 
-			// Ensure minimum ground
-			if( !ScaffoldingErectorKitItem.ValidateBeneath(leftTileX, floorTileY) ) {
+			// Ensure minimum ground prereq
+			if( !ScaffoldingErectorKitItem.ValidateBeneathFloor(leftTileX, floorTileY) ) {
 				area = new Rectangle();
 				return false;
 			}
 
-			floorTileY--;
-
-			area = new Rectangle( leftTileX, floorTileY, width, height );
+			area = new Rectangle(
+				Math.Min( leftTileX, Main.maxTilesX - width - 1 ),
+				Math.Max( floorTileY - height, 1 ),
+				width,
+				height
+			);
 
 			// Ensure clear space
 			for( int j = 0; j < height; j++ ) {
 				for( int i = 0; i < width; i++ ) {
 					int x = i + area.X;
+					if( x <= 0 || x >= Main.maxTilesX ) {
+						return false;
+					}
+
 					int y = j + area.Y;
+					if( y <= 0 || y >= Main.maxTilesY ) {
+						return false;
+					}
 
 					if( Main.tile[x, y]?.active() == true ) {
 						return false;
@@ -56,7 +56,7 @@ namespace Ergophobia.Items {
 		}
 
 
-		public static bool ValidateBeneath( int leftTileX, int floorTileY ) {
+		private static bool ValidateBeneathFloor( int leftTileX, int floorTileY ) {
 			int width = ScaffoldingErectorKitItem.ScaffoldWidth;
 			int height = ScaffoldingErectorKitItem.ScaffoldHeight;
 			int maxX = leftTileX + width;
@@ -78,6 +78,25 @@ namespace Ergophobia.Items {
 			}
 
 			return false;
+		}
+
+
+		////
+
+		private static int FindScaffoldFloorY( int leftTileX, int tileY, int width, int height ) {
+			int maxX = leftTileX + width;
+			int maxY = Math.Min( tileY + (height + 1), Main.maxTilesY );
+
+			// Find immediate 'ground' (any solid, non-actuated matter)
+			for( int y = tileY; y < maxY; y++ ) {
+				for( int x = leftTileX; x < maxX; x++ ) {
+					if( TileHelpers.IsSolid( Main.tile[x, y], true, false ) ) {
+						return y;
+					}
+				}
+			}
+
+			return maxY;
 		}
 	}
 }

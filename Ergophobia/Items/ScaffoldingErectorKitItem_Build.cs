@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ModLoader;
 using Terraria.ID;
-using HamstarHelpers.Helpers.Debug;
+using Terraria.ModLoader;
 using HamstarHelpers.Classes.Tiles.TilePattern;
+using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.Tiles;
 using HamstarHelpers.Helpers.Tiles.Draw;
 
 
@@ -14,16 +15,10 @@ namespace Ergophobia.Items {
 			int width = ScaffoldingErectorKitItem.ScaffoldWidth;
 			int height = ScaffoldingErectorKitItem.ScaffoldHeight;
 			var rect = new Rectangle(
-				leftTileX - (width / 2),
+				leftTileX,
 				floorTileY - height,
 				width,
 				height
-			);
-			var hollow = new Rectangle(
-				rect.X + 1,
-				rect.Y + 1,
-				width - 2,
-				height - 1
 			);
 
 			var postTileDef = new TileDrawDefinition {
@@ -36,13 +31,42 @@ namespace Ergophobia.Items {
 			};
 
 			//
+			
+			int findFloor( int myTileX, int myTileY ) {
+				int y;
+				for( y = myTileY; !TileHelpers.IsSolid(Main.tile[myTileX, y], true, true); y++ ) {
+					if( y >= Main.maxTilesY-1 ) {
+						break;
+					}
+				}
+				return y;
+			}
 
-			TileDrawPrimitivesHelpers.DrawRectangle(
-				filter: TilePattern.NonActive,
-				area: new Rectangle( rect.X, rect.Y + 1, rect.Width, rect.Height - 1 ),
-				hollow: hollow,
-				place: ( x, y ) => postTileDef
-			);
+			//
+
+			int rightTileX = rect.X + rect.Width - 1;
+			int lPostFloorY = findFloor( leftTileX, rect.Bottom );
+			int rPostFloorY = findFloor( rightTileX, rect.Bottom );
+
+			// Posts
+			if( Main.tile[leftTileX-1, rect.Y].wall != WallID.RichMahoganyFence ) {
+				TileDrawPrimitivesHelpers.DrawRectangle(
+					filter: TilePattern.NonActive,
+					area: new Rectangle( leftTileX, rect.Y, 1, lPostFloorY - rect.Y ),
+					hollow: null,
+					place: ( x, y ) => postTileDef
+				);
+			}
+			if( Main.tile[rightTileX + 1, rect.Y].wall != WallID.RichMahoganyFence ) {
+				TileDrawPrimitivesHelpers.DrawRectangle(
+					filter: TilePattern.NonActive,
+					area: new Rectangle( rightTileX, rect.Y, 1, rPostFloorY - rect.Y ),
+					hollow: null,
+					place: ( x, y ) => postTileDef
+				);
+			}
+
+			// Platforms
 			TileDrawPrimitivesHelpers.DrawRectangle(
 				filter: TilePattern.NonActive,
 				area: new Rectangle( rect.X, rect.Y, width, 1 ),
@@ -56,7 +80,7 @@ namespace Ergophobia.Items {
 				NetMessage.SendTileRange(
 					whoAmi: -1,
 					tileX: rect.X,
-					tileY: rect.Y ,
+					tileY: rect.Y,
 					xSize: rect.Width,
 					ySize: rect.Height
 				);

@@ -67,14 +67,14 @@ namespace Ergophobia {
 
 
 		private void CheckScaffoldArea() {
-			int tileX = (int)this.player.Center.X >> 4;
-			int tileY = (int)this.player.position.Y >> 4;
+			int tileX = (int)this.player.Center.X / 16;
+			int tileY = (int)this.player.position.Y / 16;
 
-			Rectangle rect;
-			bool canErect = ScaffoldingErectorKitItem.Validate( ref tileX, ref tileY, out rect );
+			Rectangle area;
+			bool canErect = ScaffoldingErectorKitItem.Validate( tileX, tileY, out area );
 			
-			for( int x=rect.Left; x<rect.Right; x++ ) {
-				for( int y=rect.Top; y<rect.Bottom; y++ ) {
+			for( int x=area.Left; x<area.Right; x++ ) {
+				for( int y=area.Top; y<area.Bottom; y++ ) {
 					Dust dust = Dust.NewDustPerfect(
 						Position: new Vector2( (x*16) + 8, (y*16) + 8 ),
 						Velocity: default( Vector2 ),

@@ -55,12 +55,13 @@ namespace Ergophobia.Items {
 		public override bool ConsumeItem( Player player ) {
 			int tileX = (int)player.Center.X / 16;
 			int tileY = (int)player.position.Y / 16;
+			Rectangle area;
 
-			bool canErect = ScaffoldingErectorKitItem.Validate( ref tileX, ref tileY, out Rectangle _ );
+			bool canErect = ScaffoldingErectorKitItem.Validate( tileX, tileY, out area );
 
 			if( canErect ) {
 				if( Main.netMode == NetmodeID.SinglePlayer ) {
-					ScaffoldingErectorKitItem.MakeScaffold( tileX, tileY );
+					ScaffoldingErectorKitItem.MakeScaffold( area.Left, area.Bottom );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
 					ScaffoldingKitProtocol.SendToServer( tileX, tileY );
 				} else if( Main.netMode == NetmodeID.Server ) {
