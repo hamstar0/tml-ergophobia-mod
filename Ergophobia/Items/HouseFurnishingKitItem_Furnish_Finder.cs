@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
-using Terraria.ID;
 using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Services.Timers;
 
 
 namespace Ergophobia.Items {

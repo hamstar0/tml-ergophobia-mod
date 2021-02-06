@@ -1,5 +1,9 @@
-# Prefab Kits
+# Ergophobia
 
-Supplies items that can quickly transform a given, properly shaped (and located) closed space into a livable house with some amenities.
+Removes all tile placing (except a small whitelisted set). Also supplies items that can quickly erect a variety of structures, including transforming a given, properly shaped closed space into a livable house (with some amenities). Configurable.
 
-https://github.com/hamstar0/tml-housefurnishingkit-mod/
+Credits:
+	RoboticTea - Item sprites
+	Arci - Item sprites
+
+https://github.com/hamstar0/tml-ergophobia-mod/

@@ -61,9 +61,9 @@ namespace Ergophobia.Items {
 			this.item.useTime = 30;
 			this.item.useAnimation = 30;
 			//this.item.UseSound = SoundID.Item108;
-			this.item.maxStack = 1;
+			this.item.maxStack = 30;
 			this.item.value = ErgophobiaConfig.Instance.Get<int>( nameof(ErgophobiaConfig.HouseFurnishingKitPrice) );
-			this.item.rare = 2;
+			this.item.rare = ItemRarityID.Green;
 		}
 
 

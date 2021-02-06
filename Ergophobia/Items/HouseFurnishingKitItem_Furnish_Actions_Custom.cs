@@ -41,7 +41,7 @@ namespace Ergophobia.Items {
 							custWallMount1
 						);
 					},
-					leftTileX,
+					leftTileX + 1,
 					floorTileY - 3,
 					houseTiles,
 					furnishedTiles

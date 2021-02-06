@@ -10,11 +10,11 @@ using HamstarHelpers.Helpers.Tiles.Draw;
 
 namespace Ergophobia.Items {
 	public partial class HouseFramingKitItem : ModItem {
-		public static void MakeHouseFrame( int leftTileX, int floorTileY ) {
+		public static void MakeHouseFrame( int midTileX, int floorTileY ) {
 			int width = HouseFramingKitItem.FrameWidth;
 			int height = HouseFramingKitItem.FrameHeight;
 			var outerRect = new Rectangle(
-				leftTileX - (width / 2),
+				midTileX - (width / 2),
 				floorTileY - height,
 				width,
 				height
@@ -29,51 +29,12 @@ namespace Ergophobia.Items {
 
 			//
 
-			bool isSolidFrame( int x, int y ) {
-				int offX = x - outerRect.X;
-				int offY = y - outerRect.Y;
-
-				if( offX == 0 || offX == width - 1 ) {
-					if( offY == (height - 2) ) {
-						return false;
-					} else if( offY >= (height - 4) && offY <= (height - 3) ) {
-						return false;
-					}
-				} else if( offX >= (width / 2) - 3 && offX <= (width / 2) + 2 ) {
-					if( offY == 0 ) {
-						return false;
-					}
-				}
-/*bool isActive = Main.tile[x, y].active();
-int timer = 150;
-Timers.SetTimer( "HFK0_"+x+"_"+y, 2, false, () => {
-	Dust.QuickDust( new Point(x, y), isActive ? Color.Purple : Color.Blue );
-	return timer-- > 0;
-} );*/
-				return true;
-			}
-
-			//
-
-			TileDrawDefinition getTileFeatureAt( int x, int y ) {
-				TileDrawDefinition myTileDef = null;
-				int offX = x - outerRect.X;
-				int offY = y - outerRect.Y;
-
-				if( offX == 0 || offX == width - 1 ) {
-					if( offY == (height - 2) ) {
-						myTileDef = new TileDrawDefinition { TileType = TileID.ClosedDoor };
-					} else if( offY >= (height - 4) && offY <= (height - 3) ) {
-						myTileDef = null;
-					}
-				} else if( offX >= (width / 2) - 3 && offX <= (width / 2) + 2 ) {
-					if( offY == 0 ) {
-						myTileDef = new TileDrawDefinition { TileType = TileID.Platforms };
-					}
-				}
-
-				return myTileDef;
-			}
+			bool isSolidFrame( int x, int y ) 
+				=> HouseFramingKitItem.IsHouseFrameTileSolid( x, y, width, height, outerRect );
+			TileDrawDefinition getTileFeatureAt1( int x, int y ) 
+				=> HouseFramingKitItem.GetHouseFrameTileDefAt1( x, y, width, height, outerRect );
+			TileDrawDefinition getTileFeatureAt2( int x, int y ) 
+				=> HouseFramingKitItem.GetHouseFrameTileDefAt2( x, y, width, height, outerRect );
 
 			//
 
@@ -86,10 +47,23 @@ Timers.SetTimer( "HFK0_"+x+"_"+y, 2, false, () => {
 			TileDrawPrimitivesHelpers.DrawRectangle(
 				filter: TilePattern.NonActive,
 				area: outerRect,
-				hollow: innerRect,
-				place: getTileFeatureAt
+				hollow: null,
+				place: getTileFeatureAt1
 			);
-				
+			TileDrawPrimitivesHelpers.DrawRectangle(
+				filter: TilePattern.NonActive,
+				area: outerRect,
+				hollow: null,
+				place: getTileFeatureAt2
+			);
+
+			/*int ceiling = floorTileY - height;
+
+			Tile tile1 = Main.tile[ midTileX-3, ceiling+1 ];
+			tile1.slope( 1 );
+			Tile tile2 = Main.tile[ midTileX+2, ceiling+1 ];
+			tile2.slope( 2 );*/
+
 			if( Main.netMode == NetmodeID.Server ) {
 				NetMessage.SendTileRange(
 					whoAmi: -1,
@@ -103,6 +77,114 @@ Timers.SetTimer( "HFK0_"+x+"_"+y, 2, false, () => {
 			//
 
 			HouseFramingKitItem.MakeHouseSupports( outerRect, floorTileY );
+		}
+
+
+		////
+
+		private static bool IsHouseFrameTileSolid(
+					int x,
+					int y,
+					int width,
+					int height,
+					Rectangle outerRect ) {
+			int offX = x - outerRect.X;
+			int offY = y - outerRect.Y;
+			int doorTop = height - 4;
+			int doorBot = height - 2;
+			int midLeft = (width / 2) - 3;
+			int midRight = (width / 2) + 3;
+
+			if( offX == 0 || offX == width - 1 ) {
+				if( offY >= doorTop && offY <= doorBot ) {
+					return false;
+				}
+			} else if( offX >= midLeft && offX < midRight ) {
+				if( offY == 0 ) {
+					return false;
+				}
+			}
+
+			return true;
+/*bool isActive = Main.tile[x, y].active();
+int timer = 150;
+Timers.SetTimer( "HFK0_"+x+"_"+y, 2, false, () => {
+	Dust.QuickDust( new Point(x, y), isActive ? Color.Purple : Color.Blue );
+	return timer-- > 0;
+} );*/
+		}
+
+
+		private static TileDrawDefinition GetHouseFrameTileDefAt1(
+					int x,
+					int y,
+					int width,
+					int height,
+					Rectangle outerRect ) {
+			TileDrawDefinition myTileDef = null;
+			int offX = x - outerRect.X;
+			int offY = y - outerRect.Y;
+			int doorTop = height - 4;
+			int doorBot = height - 2;
+			int midLeft = ( width / 2 ) - 3;
+			int midRight = ( width / 2 ) + 3;
+
+			// Side walls
+			if( offX == 0 || offX == width - 1 ) {
+				// Vertical just-above-just-above-floor area
+				if( offY >= doorTop && offY <= (doorBot - 1) ) {
+					myTileDef = null;
+				}
+			} else
+			// Horizontal middle
+			if( offX >= midLeft && offX < midRight ) {
+				// Top
+				if( offY == 0 ) {
+					if( offX == (midLeft+1) ) {
+						myTileDef = new TileDrawDefinition {
+							TileType = TileID.Platforms,
+							Slope = HamstarHelpers.Helpers.Tiles.TileSlopeType.TopRightSlope
+						};
+					} else if( offX == (midRight-2) ) {
+						myTileDef = new TileDrawDefinition {
+							TileType = TileID.Platforms,
+							Slope = HamstarHelpers.Helpers.Tiles.TileSlopeType.TopLeftSlope
+						};
+					} else {
+						myTileDef = new TileDrawDefinition { TileType = TileID.Platforms };
+					}
+				}
+				else if( offY == 1 ) {
+					if( offX >= (midLeft+1) && offX < (midRight-1) ) {
+						myTileDef = new TileDrawDefinition { TileType = TileID.Platforms };
+					}
+				}
+			}
+
+			return myTileDef;
+		}
+
+
+		private static TileDrawDefinition GetHouseFrameTileDefAt2(
+					int x,
+					int y,
+					int width,
+					int height,
+					Rectangle outerRect ) {
+			TileDrawDefinition myTileDef = null;
+			int offX = x - outerRect.X;
+			int offY = y - outerRect.Y;
+			int doorMid = height - 4;
+
+			// Side walls
+			if( offX == 0 || offX == width - 1 ) {
+				// Vertical just-above-floor
+				if( offY == doorMid ) {
+					myTileDef = new TileDrawDefinition { TileType = TileID.ClosedDoor };
+				}
+			}
+
+			return myTileDef;
 		}
 	}
 }
