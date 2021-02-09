@@ -14,7 +14,7 @@ namespace Ergophobia.Items {
 					int leftTileX,
 					int rightTileX,
 					int floorTileY,
-					IList<(ushort TileX, ushort TileY)> houseTiles,
+					ISet<(ushort TileX, ushort TileY)> houseTiles,
 					IDictionary<int, ISet<int>> furnishedTiles ) {
 			var config = ErgophobiaConfig.Instance;
 
@@ -73,7 +73,7 @@ namespace Ergophobia.Items {
 					ushort tileType,
 					int leftTileX,
 					int floorTileY,
-					IList<(ushort TileX, ushort TileY)> houseTiles,
+					ISet<(ushort TileX, ushort TileY)> houseTiles,
 					IDictionary<int, ISet<int>> occupiedTiles ) {
 			(bool, int) placeTile( int x, int y ) {
 				switch( tileType ) {

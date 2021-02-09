@@ -8,8 +8,8 @@ using HamstarHelpers.Helpers.Debug;
 namespace Ergophobia.Items {
 	public partial class HouseFurnishingKitItem : ModItem {
 		private static void FindHousePoints(
-					IList<(ushort TileX, ushort TileY)> innerHouseSpace,
-					IList<(ushort TileX, ushort TileY)> outerHouseSpace,
+					ISet<(ushort TileX, ushort TileY)> innerHouseSpace,
+					ISet<(ushort TileX, ushort TileY)> outerHouseSpace,
 					int floorX,
 					int floorY,
 					out (int x, int y) innerTopLeft,

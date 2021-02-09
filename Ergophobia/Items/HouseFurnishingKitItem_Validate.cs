@@ -118,8 +118,8 @@ namespace Ergophobia.Items {
 		////////////////
 
 		public static HouseViabilityState IsValidHouse( int tileX, int tileY ) {
-			IList<(ushort TileX, ushort TileY)> innerHouseSpace;
-			IList<(ushort TileX, ushort TileY)> fullHouseSpace;
+			ISet<(ushort TileX, ushort TileY)> innerHouseSpace;
+			ISet<(ushort TileX, ushort TileY)> fullHouseSpace;
 			int floorX, floorY;
 
 			return HouseFurnishingKitItem.IsValidHouse(
@@ -136,8 +136,8 @@ namespace Ergophobia.Items {
 		public static HouseViabilityState IsValidHouse(
 					int tileX,
 					int tileY,
-					out IList<(ushort TileX, ushort TileY)> innerHouseSpace,
-					out IList<(ushort TileX, ushort TileY)> fullHouseSpace,
+					out ISet<(ushort TileX, ushort TileY)> innerHouseSpace,
+					out ISet<(ushort TileX, ushort TileY)> fullHouseSpace,
 					out int floorX,
 					out int floorY ) {
 			bool isStairOrNotSolid( int x, int y ) {
@@ -245,15 +245,15 @@ namespace Ergophobia.Items {
 					int tileY,
 					int minimumVolume,
 					int minimumFloorWidth,
-					out IList<(ushort TileX, ushort TileY)> houseSpace,
+					out ISet<(ushort TileX, ushort TileY)> houseSpace,
 					out int floorX,
 					out int floorY ) {
-			IList<(ushort TileX, ushort TileY)> unclosedTiles;
-			houseSpace = TileFinderHelpers.GetAllContiguousMatchingTiles(
+			ISet<(ushort TileX, ushort TileY)> unclosedTiles;
+			houseSpace = TileFinderHelpers.GetAllContiguousMatchingTilesAt(
 				pattern: pattern,
 				tileX: tileX,
 				tileY: tileY,
-				unclosedTiles: out unclosedTiles,
+				excessTiles: out unclosedTiles,
 				maxRadius: 64
 			);
 

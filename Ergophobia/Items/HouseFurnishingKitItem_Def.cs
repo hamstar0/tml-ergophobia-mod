@@ -21,8 +21,8 @@ namespace Ergophobia.Items {
 					Player player,
 					int tileX,
 					int tileY,
-					IList<(ushort TileX, ushort TileY)> innerHouseSpace,
-					IList<(ushort TileX, ushort TileY)> fullHouseSpace,
+					ISet<(ushort TileX, ushort TileY)> innerHouseSpace,
+					ISet<(ushort TileX, ushort TileY)> fullHouseSpace,
 					int floorX,
 					int floorY ) {
 			foreach( Func<int, int, bool> func in ErgophobiaMod.Instance.OnPreHouseCreate ) {
@@ -80,7 +80,7 @@ namespace Ergophobia.Items {
 		public override bool ConsumeItem( Player player ) {
 			int tileX = (int)player.Center.X >> 4;
 			int tileY = (int)player.Center.Y >> 4;
-			IList<(ushort TileX, ushort TileY)> innerHouseSpace, fullHouseSpace;
+			ISet<(ushort TileX, ushort TileY)> innerHouseSpace, fullHouseSpace;
 			int floorX, floorY;
 			
 			HouseViabilityState state = HouseFurnishingKitItem.IsValidHouse(

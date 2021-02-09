@@ -11,8 +11,8 @@ namespace Ergophobia.Items {
 	public partial class HouseFurnishingKitItem : ModItem {
 		public static void FurnishHouse(
 					Player player,
-					IList<(ushort TileX, ushort TileY)> innerHouseSpace,
-					IList<(ushort TileX, ushort TileY)> fullHouseSpace,
+					ISet<(ushort TileX, ushort TileY)> innerHouseSpace,
+					ISet<(ushort TileX, ushort TileY)> fullHouseSpace,
 					int floorX,
 					int floorY,
 					Action onFinish ) {

@@ -43,7 +43,7 @@ namespace Ergophobia.Protocols {
 		////
 
 		protected override void Receive( int fromWho ) {
-			IList<(ushort TileX, ushort TileY)> innerHouseSpace, fullHouseSpace;
+			ISet<(ushort TileX, ushort TileY)> innerHouseSpace, fullHouseSpace;
 			int floorX, floorY;
 
 			HouseViabilityState state = HouseFurnishingKitItem.IsValidHouse(

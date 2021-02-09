@@ -9,7 +9,7 @@ using HamstarHelpers.Helpers.Debug;
 
 namespace Ergophobia.Items {
 	public partial class HouseFurnishingKitItem : ModItem {
-		private static void CleanHouse( IList<(ushort TileX, ushort TileY)> fullHouseSpace ) {	// Careful!
+		private static void CleanHouse( ISet<(ushort TileX, ushort TileY)> fullHouseSpace ) {	// Careful!
 			foreach( (ushort tileX, ushort tileY) in fullHouseSpace ) {
 				Tile tile = Main.tile[ tileX, tileY ];
 				if( !HouseFurnishingKitItem.IsCleanableTile(tile) ) {

@@ -28,7 +28,7 @@ namespace Ergophobia.Items {
 
 		////////////////
 
-		private static void MakeHouseWalls( IList<(ushort TileX, ushort TileY)> fullHouseSpace ) {
+		private static void MakeHouseWalls( ISet<(ushort TileX, ushort TileY)> fullHouseSpace ) {
 			foreach( (ushort tileX, ushort tileY) in fullHouseSpace ) {
 				Tile tile = Main.tile[tileX, tileY];
 
@@ -50,7 +50,7 @@ namespace Ergophobia.Items {
 					ushort tileType,
 					int style,
 					sbyte direction,
-					IList<(ushort TileX, ushort TileY)> houseTiles,
+					ISet<(ushort TileX, ushort TileY)> houseTiles,
 					IDictionary<int, ISet<int>> furnishedTiles ) {
 			bool isContainer = tileType == TileID.Containers
 				|| tileType == TileID.Containers2

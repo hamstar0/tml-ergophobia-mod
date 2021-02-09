@@ -13,7 +13,7 @@ namespace Ergophobia.Items {
 					Func<int, int, (bool, int)> placer,
 					int tileX,
 					int tileY,
-					IList<(ushort TileX, ushort TileY)> houseTiles,
+					ISet<(ushort TileX, ushort TileY)> houseTiles,
 					IDictionary<int, ISet<int>> furnishedTiles ) {
 			(bool success, int tileType, int x, int y) result = HouseFurnishingKitItem.MakeHouseTileNearScan(
 				attempts: new HashSet<(int, int)>(),
@@ -37,7 +37,7 @@ namespace Ergophobia.Items {
 					Func<int, int, (bool, int)> placer,
 					int tileX,
 					int tileY,
-					IList<(ushort TileX, ushort TileY)> houseTiles,
+					ISet<(ushort TileX, ushort TileY)> houseTiles,
 					IDictionary<int, ISet<int>> furnishedTiles ) {
 			if( depth < 0 ) {
 				return (false, -1, tileX, tileY);
@@ -132,7 +132,7 @@ Timers.RunUntil( () => {
 					Func<int, int, (bool, int)> placer,
 					int tileX,
 					int tileY,
-					IList<(ushort TileX, ushort TileY)> houseTiles,
+					ISet<(ushort TileX, ushort TileY)> houseTiles,
 					IDictionary<int, ISet<int>> furnishedTiles ) {
 			if( furnishedTiles.Contains2D(tileX, tileY) ) {
 //int BLAH = 0;
