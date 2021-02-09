@@ -94,9 +94,9 @@ namespace Ergophobia.Items {
 				HouseFurnishingKitItem.MakeHouseTileNear( placeTorch,		innerTopLeft.x,	innerTopLeft.y, fullHouseSpace, furnishedTiles );
 				HouseFurnishingKitItem.MakeHouseTileNear( placeTorch,		innerTopRight.x,innerTopRight.y,fullHouseSpace, furnishedTiles );
 
-				if( config.Get<ushort>( nameof(config.CustomFloorTile) ) > 0 ) {
+				if( config.Get<ushort>( nameof(config.FurnishedCustomFloorTile) ) > 0 ) {
 					HouseFurnishingKitItem.ChangeFlooring(
-						config.Get<ushort>( nameof(config.CustomFloorTile) ),
+						config.Get<ushort>( nameof(config.FurnishedCustomFloorTile) ),
 						floorLeft,
 						floorRight,
 						floorY

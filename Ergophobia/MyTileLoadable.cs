@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Terraria.ID;
 using HamstarHelpers.Classes.Loadable;
 using HamstarHelpers.Services.Hooks.ExtendedHooks;
@@ -7,7 +8,10 @@ using HamstarHelpers.Services.Hooks.ExtendedHooks;
 namespace Ergophobia {
 	class ErgophobiaTileLoadable : ILoadable {
 		public static bool CanPlaceOther( int i, int j, int type ) {
-			if( ErgophobiaConfig.Instance.TilePlaceWhitelist.Contains( TileID.GetUniqueKey( type ) ) ) {
+			var config = ErgophobiaConfig.Instance;
+			var wl = config.Get<List<string>>( nameof(config.TilePlaceWhitelist) );
+
+			if( wl.Contains( TileID.GetUniqueKey(type) ) ) {
 				return true;
 			}
 

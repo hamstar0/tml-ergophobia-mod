@@ -34,7 +34,7 @@ namespace Ergophobia {
 				addTip( "Wood", "May be used to craft framing planks" );
 				break;
 			case ItemID.WoodPlatform:
-				if( config.MaxPlatformBridgeLength > 0 ) {
+				if( config.Get<int>( nameof(config.MaxPlatformBridgeLength) ) > 0 ) {
 					addTip( "Platform", "Only placeable in short ledges attached to something solid" );
 				}
 				break;

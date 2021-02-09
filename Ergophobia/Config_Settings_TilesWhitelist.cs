@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
@@ -143,26 +142,5 @@ namespace Ergophobia {
 			new HouseKitFurnitureDefinition { TileType = TileID.Containers, IsHardMode = false },
 			new HouseKitFurnitureDefinition { TileType = TileID.Containers, IsHardMode = true },
 		};
-
-
-		////
-
-		[Range( -1, 1024 )]
-		[DefaultValue( 3 )]
-		public int MaxFramingPlankVerticalLength { get; set; } = 3;
-
-		[Range( -1, 1024 )]
-		[DefaultValue( 5 )]
-		public int MaxFramingPlankHorizontalLength { get; set; } = 5;
-
-		[Range( -1, 1024 )]
-		[DefaultValue( 8 )]
-		public int MaxPlatformBridgeLength { get; set; } = 8;
-
-		////
-
-		[Range( -1, 64 )]
-		[DefaultValue( 8 )]
-		public int MaxTrackGapPatchWidth { get; set; } = 16;
 	}
 }

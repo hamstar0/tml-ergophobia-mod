@@ -67,16 +67,16 @@ namespace Ergophobia {
 
 
 		[Range( 0, 9999 )]
-		public ushort CustomFurnitureTile { get; set; } = 0;
+		public ushort FurnishedCustomFurnitureTile { get; set; } = 0;
 
 		[Range( 0, 9999 )]
-		public ushort CustomWallMount1Tile { get; set; } = 0;
+		public ushort FurnishedCustomWallMount1Tile { get; set; } = 0;
 
 		[Range( 0, 9999 )]
-		public ushort CustomWallMount2Tile { get; set; } = 0;
+		public ushort FurnishedCustomWallMount2Tile { get; set; } = 0;
 
 		[Range( 0, 9999 )]
-		public ushort CustomFloorTile { get; set; } = 0;
+		public ushort FurnishedCustomFloorTile { get; set; } = 0;
 
 
 		[Range( 16, 1024 )]
@@ -86,5 +86,26 @@ namespace Ergophobia {
 		[Range( 4, 128 )]
 		[DefaultValue( 12 )]
 		public int MinimumFurnishableHouseFloorWidth { get; set; } = 12;
+
+
+		////
+
+		[Range( -1, 1024 )]
+		[DefaultValue( 3 )]
+		public int MaxFramingPlankVerticalLength { get; set; } = 3;
+
+		[Range( -1, 1024 )]
+		[DefaultValue( 5 )]
+		public int MaxFramingPlankHorizontalLength { get; set; } = 5;
+
+		[Range( -1, 1024 )]
+		[DefaultValue( 8 )]
+		public int MaxPlatformBridgeLength { get; set; } = 8;
+
+		////
+
+		[Range( -1, 64 )]
+		[DefaultValue( 8 )]
+		public int MaxTrackGapPatchWidth { get; set; } = 16;
 	}
 }

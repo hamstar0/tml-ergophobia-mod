@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,7 +9,8 @@ using Ergophobia.Tiles;
 namespace Ergophobia.Logic {
 	static partial class TileLogic {
 		public static bool IsSuitableForPlatform( int tileX, int tileY, int dirX ) {
-			int max = ErgophobiaConfig.Instance.MaxPlatformBridgeLength;
+			var config = ErgophobiaConfig.Instance;
+			int max = config.Get<int>( nameof(config.MaxPlatformBridgeLength) );
 			if( max < 0 ) {
 				return true;
 			}
@@ -74,8 +76,10 @@ namespace Ergophobia.Logic {
 				return tile.type == TileID.MinecartTrack;
 			}
 
+			var config = ErgophobiaConfig.Instance;
+
 			bool foundGap = false;
-			int maxGapCheck = ErgophobiaConfig.Instance.MaxTrackGapPatchWidth;
+			int maxGapCheck = config.Get<int>( nameof(config.MaxTrackGapPatchWidth) );
 			if( maxGapCheck == -1 ) {
 				return true;
 			}
@@ -161,7 +165,10 @@ namespace Ergophobia.Logic {
 		}
 
 		public static bool CanPlaceOther( int i, int j, int type ) {
-			if( ErgophobiaConfig.Instance.TilePlaceWhitelist.Contains( TileID.GetUniqueKey( type ) ) ) {
+			var config = ErgophobiaConfig.Instance;
+			var wl = config.Get<List<string>>( nameof( config.TilePlaceWhitelist ) );
+
+			if( wl.Contains( TileID.GetUniqueKey(type) ) ) {
 				return true;
 			}
 

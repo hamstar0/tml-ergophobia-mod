@@ -18,7 +18,7 @@ namespace Ergophobia.Items {
 					IDictionary<int, ISet<int>> furnishedTiles ) {
 			var config = ErgophobiaConfig.Instance;
 
-			ushort custFurnType = config.Get<ushort>( nameof(config.CustomFurnitureTile) );
+			ushort custFurnType = config.Get<ushort>( nameof(config.FurnishedCustomFurnitureTile) );
 			if( custFurnType > 0 ) {
 				HouseFurnishingKitItem.MakeHouseCustomMainFurniture(
 					custFurnType,
@@ -29,7 +29,7 @@ namespace Ergophobia.Items {
 				);
 			}
 
-			ushort custWallMount1 = config.Get<ushort>( nameof(config.CustomWallMount1Tile) );
+			ushort custWallMount1 = config.Get<ushort>( nameof(config.FurnishedCustomWallMount1Tile) );
 			if( custWallMount1 != 0 ) {
 				HouseFurnishingKitItem.MakeHouseTileNear(
 					( x, y ) => {
@@ -48,7 +48,7 @@ namespace Ergophobia.Items {
 				);
 			}
 
-			ushort custWallMount2 = config.Get<ushort>( nameof(config.CustomWallMount2Tile) );
+			ushort custWallMount2 = config.Get<ushort>( nameof(config.FurnishedCustomWallMount2Tile) );
 			if( custWallMount2 != 0 ) {
 				HouseFurnishingKitItem.MakeHouseTileNear(
 					( x, y ) => {
