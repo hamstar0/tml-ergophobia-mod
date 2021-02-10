@@ -5,5 +5,3 @@ Removes all tile placing (except a small whitelisted set). Also supplies items t
 Credits:
 	RoboticTea - Item sprites
 	Arci - Item sprites
-
-https://github.com/hamstar0/tml-ergophobia-mod/
