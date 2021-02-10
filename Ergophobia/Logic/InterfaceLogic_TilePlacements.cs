@@ -224,7 +224,7 @@ namespace Ergophobia.Logic {
 				bgColor.G = bgColor.B = 0;
 			}
 
-			Color edgeColor = AnimatedColors.Air.CurrentColor * 0.25f * outlineIntensity;
+			Color edgeColor = AnimatedColors.Air.CurrentColor * 0.35f * outlineIntensity;
 			if( !isValid ) {
 				edgeColor.G = edgeColor.B = 0;
 			}
