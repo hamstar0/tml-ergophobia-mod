@@ -42,6 +42,7 @@ namespace Ergophobia {
 			TileID.GetUniqueKey( TileID.WebRope ),
 			TileID.GetUniqueKey( TileID.Chain ),
 			//TileID.GetUniqueKey( TileID.MinecartTrack ),
+			TileID.GetUniqueKey( ModContent.TileType<FramingPlankTile>() ),
 			TileID.GetUniqueKey( ModContent.TileType<TrackDeploymentTile>() ),
 			//
 			TileID.GetUniqueKey( TileID.OpenDoor ),
