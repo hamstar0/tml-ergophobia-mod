@@ -4,6 +4,7 @@ using Terraria.ID;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
+using HamstarHelpers.Helpers.Debug;
 using Ergophobia.Items;
 using Ergophobia.Protocols;
 
@@ -128,9 +129,9 @@ namespace Ergophobia.Tiles {
 		public override void PlaceInWorld( int i, int j, Item item ) {
 			bool isFacingRight = Main.LocalPlayer.direction == 1;
 
-			if( Main.netMode == 1 ) {
+			if( Main.netMode == NetmodeID.MultiplayerClient ) {
 				TrackKitDeployProtocol.SendToServer( isFacingRight, i, j, false );
-			} else if( Main.netMode == 0 ) {
+			} else if( Main.netMode == NetmodeID.SinglePlayer ) {
 				TrackDeploymentTile.DeployAt( i, j, isFacingRight, Main.myPlayer );
 			}
 		}

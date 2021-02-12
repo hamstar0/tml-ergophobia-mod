@@ -67,16 +67,16 @@ namespace Ergophobia {
 
 
 		[Range( 0, 9999 )]
-		public ushort FurnishedCustomFurnitureTile { get; set; } = 0;
+		public int FurnishedCustomFurnitureTile { get; set; } = 0;
 
 		[Range( 0, 9999 )]
-		public ushort FurnishedCustomWallMount1Tile { get; set; } = 0;
+		public int FurnishedCustomWallMount1Tile { get; set; } = 0;
 
 		[Range( 0, 9999 )]
-		public ushort FurnishedCustomWallMount2Tile { get; set; } = 0;
+		public int FurnishedCustomWallMount2Tile { get; set; } = 0;
 
 		[Range( 0, 9999 )]
-		public ushort FurnishedCustomFloorTile { get; set; } = 0;
+		public int FurnishedCustomFloorTile { get; set; } = 0;
 
 
 		[Range( 16, 1024 )]

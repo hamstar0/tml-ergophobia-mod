@@ -1,10 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
-using Ergophobia.Tiles;
 
 
 namespace Ergophobia {
@@ -34,6 +33,12 @@ namespace Ergophobia {
 
 
 	public partial class ErgophobiaConfig : ModConfig {
+		[DefaultValue( true )]
+		public bool IsFramingPlankWhitelisted { get; set; } = true;
+
+		[DefaultValue( true )]
+		public bool IsTrackDeploymentWhitelisted { get; set; } = true;
+
 		public List<string> TilePlaceWhitelist { get; set; } = new List<string> {
 			//
 			TileID.GetUniqueKey( TileID.Rope ),
@@ -42,8 +47,6 @@ namespace Ergophobia {
 			TileID.GetUniqueKey( TileID.WebRope ),
 			TileID.GetUniqueKey( TileID.Chain ),
 			//TileID.GetUniqueKey( TileID.MinecartTrack ),
-			TileID.GetUniqueKey( ModContent.TileType<FramingPlankTile>() ),
-			TileID.GetUniqueKey( ModContent.TileType<TrackDeploymentTile>() ),
 			//
 			TileID.GetUniqueKey( TileID.OpenDoor ),
 			TileID.GetUniqueKey( TileID.ClosedDoor ),

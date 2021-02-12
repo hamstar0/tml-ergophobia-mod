@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using HamstarHelpers.Helpers.Debug;
 using Ergophobia.Tiles;
 
 
@@ -172,6 +173,13 @@ namespace Ergophobia.Logic {
 				return true;
 			}
 
+			if( type == ModContent.TileType<FramingPlankTile>() ) {
+				return config.Get<bool>( nameof(config.IsFramingPlankWhitelisted) );
+			}
+			if( type == ModContent.TileType<TrackDeploymentTile>() ) {
+				return config.Get<bool>( nameof(config.IsTrackDeploymentWhitelisted) );
+			}
+			
 			return false;
 		}
 	}
