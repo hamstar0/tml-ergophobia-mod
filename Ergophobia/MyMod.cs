@@ -7,7 +7,7 @@ using Terraria;
 using Terraria.ModLoader;
 using HamstarHelpers.Helpers.TModLoader.Mods;
 using HamstarHelpers.Services.AnimatedColor;
-using Ergophobia.Items;
+using Ergophobia.Items.TrackDeploymentKit;
 using Ergophobia.Recipes;
 
 

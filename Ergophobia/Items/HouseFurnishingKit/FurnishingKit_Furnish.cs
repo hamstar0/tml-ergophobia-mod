@@ -7,7 +7,7 @@ using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Services.Timers;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFurnishingKit {
 	public partial class HouseFurnishingKitItem : ModItem {
 		public static void FurnishHouse(
 					Player player,

@@ -9,7 +9,7 @@ using HamstarHelpers.Helpers.Tiles;
 using HamstarHelpers.Helpers.Tiles.Draw;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.ScaffoldingKit {
 	public partial class ScaffoldingErectorKitItem : ModItem {
 		public static void MakeScaffold( int leftTileX, int floorTileY ) {
 			int width = ScaffoldingErectorKitItem.ScaffoldWidth;

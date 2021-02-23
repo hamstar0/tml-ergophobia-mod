@@ -7,7 +7,7 @@ using HamstarHelpers.Helpers.Tiles;
 using Ergophobia.Tiles;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.ScaffoldingKit {
 	public partial class ScaffoldingErectorKitItem : ModItem {
 		public static bool Validate( int tileX, int tileY, out Rectangle area ) {
 			int width = ScaffoldingErectorKitItem.ScaffoldWidth;

@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 using Ergophobia.Tiles;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.TrackDeploymentKit {
 	public partial class TrackDeploymentKitItem : ModItem {
 		public const int ItemWidth = 32;
 		public const int ItemHeight = 32;

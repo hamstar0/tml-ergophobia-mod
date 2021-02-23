@@ -7,7 +7,7 @@ using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.DotNET.Extensions;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFurnishingKit {
 	public partial class HouseFurnishingKitItem : ModItem {
 		public static bool MakeHouseTileNear(
 					Func<int, int, (bool, int)> placer,

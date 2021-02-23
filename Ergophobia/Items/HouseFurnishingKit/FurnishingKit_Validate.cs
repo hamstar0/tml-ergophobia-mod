@@ -10,7 +10,7 @@ using HamstarHelpers.Helpers.Tiles.Walls;
 using HamstarHelpers.Services.Timers;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFurnishingKit {
 	public enum HouseViabilityState {
 		Good,
 		TooSmall,

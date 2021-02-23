@@ -7,7 +7,7 @@ using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Helpers.Debug;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFurnishingKit {
 	public partial class HouseFurnishingKitItem : ModItem {
 		private static void CleanHouse( ISet<(ushort TileX, ushort TileY)> fullHouseSpace ) {	// Careful!
 			foreach( (ushort tileX, ushort tileY) in fullHouseSpace ) {

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using Terraria;
-using Terraria.ID;
 using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Classes.Tiles.TilePattern;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.TrackDeploymentKit {
 	public partial class TrackDeploymentKitItem : ModItem {
 		public class PathTree {
 			public int TileX;

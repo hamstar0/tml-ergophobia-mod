@@ -8,7 +8,7 @@ using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Tiles;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFurnishingKit {
 	public partial class HouseFurnishingKitItem : ModItem {
 		private static void MakeHouseCustomFurnishings(
 					int leftTileX,

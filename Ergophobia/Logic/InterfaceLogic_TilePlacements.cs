@@ -6,8 +6,8 @@ using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Draw;
 using HamstarHelpers.Helpers.Players;
 using HamstarHelpers.Services.AnimatedColor;
-using Ergophobia.Items;
 using Ergophobia.Tiles;
+using Ergophobia.Items.FramingPlank;
 
 
 namespace Ergophobia.Logic {

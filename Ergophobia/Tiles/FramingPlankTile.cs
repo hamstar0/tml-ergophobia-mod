@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Ergophobia.Items;
+using Ergophobia.Items.FramingPlank;
 
 
 namespace Ergophobia.Tiles {

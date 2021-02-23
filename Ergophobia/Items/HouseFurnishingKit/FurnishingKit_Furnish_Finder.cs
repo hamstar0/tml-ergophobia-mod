@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFurnishingKit {
 	public partial class HouseFurnishingKitItem : ModItem {
 		private static void FindHousePoints(
 					ISet<(ushort TileX, ushort TileY)> innerHouseSpace,

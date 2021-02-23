@@ -8,7 +8,7 @@ using HamstarHelpers.Helpers.Tiles.Draw;
 using HamstarHelpers.Helpers.Tiles;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFramingKit {
 	public partial class HouseFramingKitItem : ModItem {
 		public static bool Validate( ref int leftTileX, ref int floorTileY, out ISet<(int, int)> tiles ) {
 			int width = HouseFramingKitItem.FrameWidth;

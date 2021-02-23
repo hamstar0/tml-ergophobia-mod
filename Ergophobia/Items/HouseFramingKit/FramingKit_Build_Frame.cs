@@ -8,7 +8,7 @@ using HamstarHelpers.Classes.Tiles.TilePattern;
 using HamstarHelpers.Helpers.Tiles.Draw;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFramingKit {
 	public partial class HouseFramingKitItem : ModItem {
 		public static void MakeHouseFrame( int midTileX, int floorTileY ) {
 			int width = HouseFramingKitItem.FrameWidth;

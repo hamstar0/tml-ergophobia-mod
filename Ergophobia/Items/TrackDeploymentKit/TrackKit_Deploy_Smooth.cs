@@ -5,7 +5,7 @@ using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.TrackDeploymentKit {
 	public partial class TrackDeploymentKitItem : ModItem {
 		private static void SmoothPath( IList<(int tileX, int tileY)> path ) {
 			int prevHighNodeIdx = 0;

@@ -10,7 +10,7 @@ using HamstarHelpers.Services.Timers;
 using Ergophobia.Protocols;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.TrackDeploymentKit {
 	public partial class TrackDeploymentKitItem : ModItem {
 		public static void PlaceTrack( int x, int y ) {
 			WorldGen.PlaceTile( x, y, TileID.MinecartTrack );

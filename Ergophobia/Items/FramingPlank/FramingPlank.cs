@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using Ergophobia.Tiles;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.FramingPlank {
 	public class FramingPlankItem : ModItem {
 		public override void SetStaticDefaults() {
 			string text = "May be used for light patching or small structures";
@@ -21,7 +21,7 @@ namespace Ergophobia.Items {
 			this.item.autoReuse = true;
 			this.item.useAnimation = 15;
 			this.item.useTime = 10;
-			this.item.useStyle = 1;
+			this.item.useStyle = ItemUseStyleID.SwingThrow;
 			this.item.consumable = true;
 			this.item.createTile = ModContent.TileType<FramingPlankTile>();
 		}

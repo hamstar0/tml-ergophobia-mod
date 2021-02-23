@@ -8,7 +8,7 @@ using HamstarHelpers.Helpers.Debug;
 using Ergophobia.Protocols;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFurnishingKit {
 	public partial class HouseFurnishingKitItem : ModItem {
 		public static int Width = 36;
 		public static int Height = 28;

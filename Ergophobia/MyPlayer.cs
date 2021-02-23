@@ -5,7 +5,10 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
-using Ergophobia.Items;
+using Ergophobia.Items.HouseFramingKit;
+using Ergophobia.Items.HouseFurnishingKit;
+using Ergophobia.Items.ScaffoldingKit;
+using Ergophobia.Items.TrackDeploymentKit;
 
 
 namespace Ergophobia {

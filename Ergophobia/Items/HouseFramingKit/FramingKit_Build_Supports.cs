@@ -8,7 +8,7 @@ using HamstarHelpers.Classes.Tiles.TilePattern;
 using HamstarHelpers.Helpers.Tiles.Draw;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.HouseFramingKit {
 	public partial class HouseFramingKitItem : ModItem {
 		private static void MakeHouseSupports( Rectangle rect, int floorTileY ) {
 			var supportLeft = new Rectangle( rect.X, floorTileY, 1, 256 );

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -8,36 +7,35 @@ using HamstarHelpers.Helpers.Debug;
 using Ergophobia.Protocols;
 
 
-namespace Ergophobia.Items {
-	public partial class HouseFramingKitItem : ModItem {
+namespace Ergophobia.Items.ScaffoldingKit {
+	public partial class ScaffoldingErectorKitItem : ModItem {
 		public readonly static int ItemWidth = 24;
 		public readonly static int ItemHeight = 22;
-
-		public readonly static int FrameWidth = 16;
-		public readonly static int FrameHeight = 8;
+		public readonly static int ScaffoldWidth = 5;
+		public readonly static int ScaffoldHeight = 6;
 
 
 
 		////////////////
 
 		public override void SetStaticDefaults() {
-			this.DisplayName.SetDefault( "House Framing Kit" );
+			this.DisplayName.SetDefault( "Scaffolding Erector Kit" );
 			this.Tooltip.SetDefault(
-				"Attempts to erect a skeletal house frame"
-				+"\nFor use when no existing house structure is available"
+				"Attempts to erect a scaffold piece"
+				+"\nFor use in making arenas, bridges, or aiding in house construction"
 			);
 		}
 
 		public override void SetDefaults() {
-			this.item.width = HouseFramingKitItem.ItemWidth;
-			this.item.height = HouseFramingKitItem.ItemHeight;
+			this.item.width = ScaffoldingErectorKitItem.ItemWidth;
+			this.item.height = ScaffoldingErectorKitItem.ItemHeight;
 			this.item.consumable = true;
 			this.item.useStyle = ItemUseStyleID.HoldingUp;
 			this.item.useTime = 30;
 			this.item.useAnimation = 30;
 			//this.item.UseSound = SoundID.Item108;
 			this.item.maxStack = 30;
-			this.item.value = ErgophobiaConfig.Instance.Get<int>( nameof(ErgophobiaConfig.HouseFramingKitPrice) );
+			this.item.value = ErgophobiaConfig.Instance.Get<int>( nameof(ErgophobiaConfig.ScaffoldingKitPrice) );
 			this.item.rare = ItemRarityID.Green;
 		}
 
@@ -52,24 +50,25 @@ namespace Ergophobia.Items {
 			return base.UseItem( player );
 		}
 
-		public override bool ConsumeItem( Player player ) {
-			int tileX = (int)player.Center.X >> 4;
-			int tileY = (int)player.position.Y >> 4;
+		////
 
-			ISet<(int, int)> _;
-			bool canErect = HouseFramingKitItem.Validate( ref tileX, ref tileY, out _ );
+		public override bool ConsumeItem( Player player ) {
+			int tileX = (int)player.Center.X / 16;
+			int tileY = (int)player.position.Y / 16;
+			Rectangle area;
+
+			bool canErect = ScaffoldingErectorKitItem.Validate( tileX, tileY, out area );
 
 			if( canErect ) {
 				if( Main.netMode == NetmodeID.SinglePlayer ) {
-					HouseFramingKitItem.MakeHouseFrame( tileX, tileY );
+					ScaffoldingErectorKitItem.MakeScaffold( area.Left, area.Bottom );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
-					FramingKitProtocol.SendToServer( tileX, tileY );
-					return true;
+					ScaffoldingKitProtocol.SendToServer( tileX, tileY );
 				} else if( Main.netMode == NetmodeID.Server ) {
 					LogHelpers.Alert( "Server?" );
 				}
 			} else {
-				Main.NewText( "Not enough open space.", Color.Yellow );
+				Main.NewText( "Invalid location.", Color.Yellow );
 			}
 
 			return canErect;

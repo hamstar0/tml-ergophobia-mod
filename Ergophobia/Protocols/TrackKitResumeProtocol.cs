@@ -4,7 +4,7 @@ using Terraria.ID;
 using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
 using HamstarHelpers.Helpers.Debug;
-using Ergophobia.Items;
+using Ergophobia.Items.TrackDeploymentKit;
 
 
 namespace Ergophobia.Protocols {

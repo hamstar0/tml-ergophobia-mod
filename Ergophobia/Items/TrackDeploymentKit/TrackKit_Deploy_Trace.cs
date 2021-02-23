@@ -8,7 +8,7 @@ using HamstarHelpers.Classes.Tiles.TilePattern;
 using HamstarHelpers.Helpers.Debug;
 
 
-namespace Ergophobia.Items {
+namespace Ergophobia.Items.TrackDeploymentKit {
 	public partial class TrackDeploymentKitItem : ModItem {
 		private static TilePattern TrackValid = new TilePattern( new TilePatternBuilder {
 			AreaFromCenter = new Rectangle( 0, -3, 1, 5 ),
