@@ -53,9 +53,11 @@ namespace Ergophobia {
 
 			//
 
-			bool canPlace = config.TilePlaceWhitelist.Contains( TileID.GetUniqueKey(item.createTile) );
-			if( item.createTile > -1 && !canPlace ) {
-				addTip( "Placeable", "This tile is not allowed to be placed" );
+			if( item.createTile > -1 ) {
+				bool canPlace = config.TilePlaceWhitelist.Contains( TileID.GetUniqueKey(item.createTile) );
+				if( !canPlace ) {
+					addTip( "Placeable", "This tile is not allowed to be placed" );
+				}
 			}
 		}
 	}
