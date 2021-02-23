@@ -25,15 +25,15 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					ISet<(ushort TileX, ushort TileY)> fullHouseSpace,
 					int floorX,
 					int floorY ) {
-			foreach( Func<int, int, bool> func in ErgophobiaMod.Instance.OnPreHouseCreate ) {
+			foreach( Func<int, int, bool> func in ErgophobiaMod.Instance.OnPreHouseFurnish ) {
 				if( !func( tileX, tileY ) ) {
 					return false;
 				}
 			}
 
-			HouseFurnishingKitItem.FurnishHouse( player, innerHouseSpace, fullHouseSpace, floorX, floorY, () => {
-				foreach( Action<int, int> action in ErgophobiaMod.Instance.OnPostHouseCreate ) {
-					action( tileX, tileY );
+			HouseFurnishingKitItem.FurnishHouse( player, innerHouseSpace, fullHouseSpace, floorX, floorY, (p1, p2, p3, p4, p5, p6, p7, p8, p9) => {
+				foreach( OnFurnishHouse action in ErgophobiaMod.Instance.OnPostHouseFurnish ) {
+					action( p1, p2, p3, p4, p5, p6, p7, p8, p9 );
 				}
 			} );
 

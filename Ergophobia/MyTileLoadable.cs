@@ -12,12 +12,12 @@ namespace Ergophobia {
 		////////////////
 
 		public void OnModsLoad() {
-			ErgophobiaAPI.OnPreHouseCreate( ( tileX, tileY ) => {
+			ErgophobiaAPI.OnPreHouseFurnish( ( tileX, tileY ) => {
 				this.IsCreatingHouse = true;
 				return true;
 			} );
 
-			ErgophobiaAPI.OnPostHouseCreate( ( tileX, tileY ) => {
+			ErgophobiaAPI.OnPostHouseFurnish( ( p1, p2, p3, p4, p5, p6, p7, p8, p9 ) => {
 				this.IsCreatingHouse = false;
 			} );
 

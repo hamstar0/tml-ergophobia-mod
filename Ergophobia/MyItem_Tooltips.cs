@@ -23,7 +23,7 @@ namespace Ergophobia {
 			//
 
 			void addTip( string ctx, string desc ) {
-				TooltipLine tip = new TooltipLine( this.mod, "AdventureMode"+ctx, modName + desc );
+				TooltipLine tip = new TooltipLine( this.mod, "Ergophobia"+ctx, modName + desc );
 				ItemInformationAttributeHelpers.ApplyTooltipAt( tooltips, tip );
 			}
 
@@ -49,6 +49,13 @@ namespace Ergophobia {
 				addTip( "Track1", "Can only bridge gaps or be placed downwards" );
 				addTip( "Track2", "May be used to craft track deployment kits" );
 				break;
+			}
+
+			//
+
+			bool canPlace = config.TilePlaceWhitelist.Contains( TileID.GetUniqueKey(item.createTile) );
+			if( item.createTile > -1 && !canPlace ) {
+				addTip( "Placeable", "This tile is not allowed to be placed" );
 			}
 		}
 	}

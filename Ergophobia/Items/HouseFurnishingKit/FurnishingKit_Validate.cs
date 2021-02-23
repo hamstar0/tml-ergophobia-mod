@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Classes.Tiles.TilePattern;
 using HamstarHelpers.Helpers.Tiles;
+using HamstarHelpers.Classes.Tiles.TilePattern;
 using HamstarHelpers.Helpers.Tiles.Walls;
 using HamstarHelpers.Services.Timers;
 
@@ -16,7 +17,8 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 		TooSmall,
 		TooSmallInner,
 		TooLarge,
-		SmallFloor
+		SmallFloor,
+		ContainsOccupiedChest
 	}
 
 
@@ -73,7 +75,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			case TileID.VineRope:
 			case TileID.WebRope:
 			case TileID.Chain:
-			///
+			//
 			case TileID.Tombstones:
 			case TileID.CopperCoinPile:
 			case TileID.SilverCoinPile:
@@ -84,23 +86,24 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			case TileID.LargePiles:
 			case TileID.LargePiles2:
 			case TileID.ExposedGems:
-			///
-			case TileID.Heart:
+			//
+			//case TileID.Heart:
 			case TileID.Pots:
-			case TileID.ShadowOrbs:
-			case TileID.DemonAltar:
+			//case TileID.ShadowOrbs:
+			//case TileID.DemonAltar:
 			case TileID.LifeFruit:
-			case TileID.PlanteraBulb:
+			//case TileID.PlanteraBulb:
 			case TileID.Bottles:
 			case TileID.Books:
 			case TileID.WaterCandle:
 			case TileID.PeaceCandle:
-			///
+			//
 			case TileID.HoneyDrip:
 			case TileID.LavaDrip:
 			case TileID.SandDrip:
 			case TileID.WaterDrip:
-			///
+			//
+			case TileID.BreakableIce:
 			case TileID.MagicalIceBlock:
 				return true;
 			default:
@@ -140,6 +143,21 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					out ISet<(ushort TileX, ushort TileY)> fullHouseSpace,
 					out int floorX,
 					out int floorY ) {
+			HouseViabilityState state;
+
+			//
+
+			bool containsUnsafeChest( int x, int y ) {
+				Tile tile = Main.tile[x, y];
+				if( tile.type == TileID.Containers || tile.type == TileID.Containers2 || tile.type == TileID.FakeContainers || tile.type == TileID.FakeContainers2 ) {
+					int chestIdx = Chest.FindChestByGuessing( tileX, tileY );
+					if( chestIdx != -1 && Main.chest[chestIdx].item.Any( i => i?.IsAir == false ) ) {
+						return true;   // No non-empty chests
+					}
+				}
+				return false;
+			}
+
 			bool isStairOrNotSolid( int x, int y ) {
 				Tile tile = Main.tile[ x, y ];
 				if( TileWallGroupIdentityHelpers.UnsafeDungeonWallTypes.Contains( tile.wall ) ) {
@@ -161,9 +179,6 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 
 			//
 
-			TilePattern formPattern = new TilePattern( new TilePatternBuilder {
-				CustomCheck = isStairOrNotSolid
-			} );
 			TilePattern fillPattern = new TilePattern( new TilePatternBuilder {
 				AreaFromCenter = new Rectangle( -1, -1, 3, 3 ),
 				HasWater = false,
@@ -179,8 +194,10 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			int minVolume = config.Get<int>( nameof(config.MinimumFurnishableHouseArea) );	//78
 			int minFloorWid = config.Get<int>( nameof(config.MinimumFurnishableHouseFloorWidth) );    //12
 
-			HouseViabilityState state = HouseFurnishingKitItem.IsValidHouseByCriteria(
-				pattern: formPattern,
+			state = HouseFurnishingKitItem.IsValidHouseByCriteria(
+				pattern: new TilePattern( new TilePatternBuilder {
+					CustomCheck = isStairOrNotSolid
+				} ),
 				tileX: tileX,
 				tileY: tileY,
 				minimumVolume: minVolume,
@@ -197,6 +214,24 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			if( state != HouseViabilityState.Good ) {
 				innerHouseSpace = fullHouseSpace;
 				return state;
+			}
+
+			//
+
+			IList<(ushort TileX, ushort TileY)> unsafeChestTiles = TileFinderHelpers.GetTileMatchesInWorldRectangle(
+				pattern: new TilePattern( new TilePatternBuilder {
+					CustomCheck = containsUnsafeChest
+				} ),
+				worldRect: new Rectangle(
+					tileX,
+					tileY,
+					(int)fullHouseSpace.Aggregate( (xy1, xy2) => xy1.TileX > xy2.TileX ? xy1 : xy2 ).TileX - tileX,
+					(int)fullHouseSpace.Aggregate( (xy1, xy2) => xy1.TileY > xy2.TileY ? xy1 : xy2 ).TileY - tileY
+				)
+			);
+			if( unsafeChestTiles.Count > 0 ) {
+				innerHouseSpace = fullHouseSpace;
+				return HouseViabilityState.ContainsOccupiedChest;
 			}
 
 			//
@@ -238,6 +273,8 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			return state;
 		}
 
+
+		////
 
 		private static HouseViabilityState IsValidHouseByCriteria(
 					TilePattern pattern,

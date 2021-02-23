@@ -63,7 +63,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					return false;
 				}
 
-				if( Main.netMode == 2 ) {
+				if( Main.netMode == NetmodeID.Server ) {
 					int? chestTypeRaw = HamstarHelpers.Helpers.Tiles.Attributes.TileAttributeHelpers.GetChestTypeCode( tileType );
 					int? chestType = chestTypeRaw.HasValue ? chestTypeRaw.Value : 0;
 

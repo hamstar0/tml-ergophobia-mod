@@ -7,8 +7,9 @@ using Terraria;
 using Terraria.ModLoader;
 using HamstarHelpers.Helpers.TModLoader.Mods;
 using HamstarHelpers.Services.AnimatedColor;
-using Ergophobia.Items.TrackDeploymentKit;
 using Ergophobia.Recipes;
+using Ergophobia.Items.HouseFurnishingKit;
+using Ergophobia.Items.TrackDeploymentKit;
 
 
 namespace Ergophobia {
@@ -26,8 +27,8 @@ namespace Ergophobia {
 
 		////////////////
 
-		internal IList<Func<int, int, bool>> OnPreHouseCreate = new List<Func<int, int, bool>>();
-		internal IList<Action<int, int>> OnPostHouseCreate = new List<Action<int, int>>();
+		internal IList<Func<int, int, bool>> OnPreHouseFurnish = new List<Func<int, int, bool>>();
+		internal IList<HouseFurnishingKitItem.OnFurnishHouse> OnPostHouseFurnish = new List<HouseFurnishingKitItem.OnFurnishHouse>();
 
 
 

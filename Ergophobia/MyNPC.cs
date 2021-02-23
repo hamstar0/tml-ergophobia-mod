@@ -47,5 +47,44 @@ namespace Ergophobia {
 				addToShop( ModContent.ItemType<TrackDeploymentKitItem>(), ref nextSlot );
 			}
 		}
+
+
+		////
+
+		public override void AI( NPC npc ) {
+			if( !npc.townNPC ) {
+				return;
+			}
+
+			int tileX = (int)npc.Center.X / 16;
+			int tileY = (int)npc.Center.Y / 16;
+
+			switch( Framing.GetTileSafely( tileX, tileY ).type ) {
+			case TileID.Beds:
+			case TileID.Containers:
+			case TileID.Containers2:
+				this.Avoid( npc );
+				return;
+			}
+			switch( Framing.GetTileSafely( tileX, tileY+1 ).type ) {
+			case TileID.Beds:
+			case TileID.Containers:
+			case TileID.Containers2:
+				this.Avoid( npc );
+				return;
+			}
+			switch( Framing.GetTileSafely( tileX, tileY+2 ).type ) {
+			case TileID.Beds:
+			case TileID.Containers:
+			case TileID.Containers2:
+				this.Avoid( npc );
+				return;
+			}
+		}
+
+
+		private void Avoid( NPC npc ) {
+			npc.velocity.X *= 1.1f;
+		}
 	}
 }

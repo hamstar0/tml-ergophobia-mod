@@ -30,7 +30,7 @@ namespace Ergophobia.Items.FramingPlank {
 
 		public override void AddRecipes() {
 			ModRecipe recipe = new ModRecipe( this.mod );
-			recipe.AddRecipeGroup( "Wood", 4 );
+			recipe.AddRecipeGroup( "Wood", 3 );
 			recipe.AddTile( TileID.Sawmill );
 			recipe.SetResult( this, 1 );
 			recipe.AddRecipe();

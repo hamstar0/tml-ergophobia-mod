@@ -9,13 +9,29 @@ using HamstarHelpers.Services.Timers;
 
 namespace Ergophobia.Items.HouseFurnishingKit {
 	public partial class HouseFurnishingKitItem : ModItem {
+		public delegate void OnFurnishHouse(
+			(int x, int y) innerTopLeft,
+			(int x, int y) innerTopRight,
+			(int x, int y) outerTopLeft,
+			(int x, int y) outerTopRight,
+			int floorLeft,
+			int floorRight,
+			int floorY,
+			(int x, int y) farTopLeft,
+			(int x, int y) farTopRight
+		);
+
+
+
+		////////////////
+
 		public static void FurnishHouse(
 					Player player,
 					ISet<(ushort TileX, ushort TileY)> innerHouseSpace,
 					ISet<(ushort TileX, ushort TileY)> fullHouseSpace,
 					int floorX,
 					int floorY,
-					Action onFinish ) {
+					OnFurnishHouse onFinish ) {
 			(int x, int y) innerTopLeft, innerTopRight;
 			(int x, int y) outerTopLeft, outerTopRight;
 			int floorLeft, floorRight;
@@ -102,9 +118,10 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 						floorY
 					);
 				}
-				onFinish();
 
-				if( Main.netMode == 2 ) {
+				onFinish( innerTopLeft, innerTopRight, outerTopLeft, outerTopRight, floorLeft, floorRight, floorY, farTopLeft, farTopRight );
+
+				if( Main.netMode == NetmodeID.Server ) {
 					int width = outerTopRight.x - outerTopLeft.x;
 					int height = (floorY - outerTopLeft.y) + 2;
 
