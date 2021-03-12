@@ -15,6 +15,13 @@ using Ergophobia.Protocols;
 
 namespace Ergophobia {
 	partial class ErgophobiaPlayer : ModPlayer {
+		private bool _HasPreviousHouseViableAlert = false;
+		private bool _FurnishingTipShown = false;
+
+
+
+		////////////////
+
 		private void CheckFurnishableHouse() {
 			(int x, int y) pos = (this.CurrentHouseChunkX, this.CurrentHouseChunkY);
 			if( !this.ChartedHouseSpaces.Contains(pos) ) {
@@ -23,22 +30,29 @@ namespace Ergophobia {
 				return;
 			}
 
-			HouseViabilityState state = HouseFurnishingKitItem.IsValidHouse(
-				(int)this.player.Center.X / 16,
-				(int)this.player.Center.Y / 16
-			);
+			int tileX = (int)this.player.Center.X / 16;
+			int tileY = (int)this.player.Center.Y / 16;
+			HouseViabilityState state = HouseFurnishingKitItem.IsValidHouse( tileX, tileY );
 
 			if( state == HouseViabilityState.Good ) {
-				if( !this.HasPreviousHouseViableAlert ) {
-					this.HasPreviousHouseViableAlert = true;
+				if( !this._HasPreviousHouseViableAlert ) {
+					this._HasPreviousHouseViableAlert = true;
 
 					Color color;
-					string msg = HouseFurnishingKitItem.GetViabilityStateMessage( HouseViabilityState.Good, 0, 0, out color );
+					string msg = HouseFurnishingKitItem.GetViabilityStateMessage(
+						state: HouseViabilityState.Good,
+						fullSpace: 0,
+						innerSpace: 0,
+						verbose: !this._FurnishingTipShown,
+						color: out color
+					);
+
+					this._FurnishingTipShown = true;
 
 					Main.NewText( msg, color );
 				}
 			} else {
-				this.HasPreviousHouseViableAlert = false;
+				this._HasPreviousHouseViableAlert = false;
 			}
 		}
 

@@ -115,6 +115,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					state,
 					fullHouseSpace.Count,
 					innerHouseSpace.Count,
+					false,
 					out color
 				);
 

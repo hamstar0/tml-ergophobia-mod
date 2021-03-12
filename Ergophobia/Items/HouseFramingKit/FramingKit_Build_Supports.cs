@@ -20,7 +20,7 @@ namespace Ergophobia.Items.HouseFramingKit {
 
 			//
 
-			TileDrawDefinition placeSupportLeft( int x, int y ) {
+			TileDrawDefinition getSupportLeftDef( int x, int y ) {
 				if( y >= floorLeft ) {
 					return null;
 				}
@@ -38,7 +38,7 @@ namespace Ergophobia.Items.HouseFramingKit {
 
 			//
 
-			TileDrawDefinition placeSupportRight( int x, int y ) {
+			TileDrawDefinition getSupportRightDef( int x, int y ) {
 				if( y >= floorRight ) {
 					return null;
 				}
@@ -60,13 +60,13 @@ namespace Ergophobia.Items.HouseFramingKit {
 				filter: TilePattern.Any,
 				area: supportLeft,
 				hollow: null,
-				place: placeSupportLeft
+				place: getSupportLeftDef
 			);
 			TileDrawPrimitivesHelpers.DrawRectangle(
 				filter: TilePattern.Any,
 				area: supportRight,
 				hollow: null,
-				place: placeSupportRight
+				place: getSupportRightDef
 			);
 
 			if( Main.netMode == NetmodeID.Server ) {

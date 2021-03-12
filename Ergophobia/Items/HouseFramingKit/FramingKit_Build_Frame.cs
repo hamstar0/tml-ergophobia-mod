@@ -29,12 +29,8 @@ namespace Ergophobia.Items.HouseFramingKit {
 
 			//
 
-			bool isSolidFrame( int x, int y ) 
+			bool isSolidFrame( int x, int y )
 				=> HouseFramingKitItem.IsHouseFrameTileSolid( x, y, width, height, outerRect );
-			TileDrawDefinition getTileFeatureAt1( int x, int y ) 
-				=> HouseFramingKitItem.GetHouseFrameTileDefAt1( x, y, width, height, outerRect );
-			TileDrawDefinition getTileFeatureAt2( int x, int y ) 
-				=> HouseFramingKitItem.GetHouseFrameTileDefAt2( x, y, width, height, outerRect );
 
 			//
 
@@ -48,13 +44,13 @@ namespace Ergophobia.Items.HouseFramingKit {
 				filter: TilePattern.NonActive,
 				area: outerRect,
 				hollow: null,
-				place: getTileFeatureAt1
+				place: ( int x, int y ) => HouseFramingKitItem.GetHouseFrameTileDefAt1(x, y, width, height, outerRect)
 			);
 			TileDrawPrimitivesHelpers.DrawRectangle(
 				filter: TilePattern.NonActive,
 				area: outerRect,
 				hollow: null,
-				place: getTileFeatureAt2
+				place: ( int x, int y ) => HouseFramingKitItem.GetHouseFrameTileDefAt2(x, y, width, height, outerRect)
 			);
 
 			/*int ceiling = floorTileY - height;
@@ -143,20 +139,28 @@ Timers.SetTimer( "HFK0_"+x+"_"+y, 2, false, () => {
 					if( offX == (midLeft+1) ) {
 						myTileDef = new TileDrawDefinition {
 							TileType = TileID.Platforms,
+							TileStyle = 0,
 							Slope = HamstarHelpers.Helpers.Tiles.TileSlopeType.TopRightSlope
 						};
 					} else if( offX == (midRight-2) ) {
 						myTileDef = new TileDrawDefinition {
 							TileType = TileID.Platforms,
+							TileStyle = 0,
 							Slope = HamstarHelpers.Helpers.Tiles.TileSlopeType.TopLeftSlope
 						};
 					} else {
-						myTileDef = new TileDrawDefinition { TileType = TileID.Platforms };
+						myTileDef = new TileDrawDefinition {
+							TileType = TileID.Platforms,
+							TileStyle = 0
+						};
 					}
 				}
 				else if( offY == 1 ) {
 					if( offX >= (midLeft+1) && offX < (midRight-1) ) {
-						myTileDef = new TileDrawDefinition { TileType = TileID.Platforms };
+						myTileDef = new TileDrawDefinition {
+							TileType = TileID.Platforms,
+							TileStyle = 0
+						};
 					}
 				}
 			}

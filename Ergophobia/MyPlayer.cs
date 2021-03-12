@@ -27,7 +27,6 @@ namespace Ergophobia {
 		private int CurrentHouseChunkX;
 		private int CurrentHouseChunkY;
 
-		private bool HasPreviousHouseViableAlert = false;
 		private ISet<(int, int)> ChartedHouseSpaces = new HashSet<(int, int)>();
 
 
@@ -82,8 +81,8 @@ namespace Ergophobia {
 		////
 
 		private bool UpdateHouseChunkCheckPosition() {
-			int chunkX = (int)this.player.Center.X / 64;
-			int chunkY = (int)this.player.Center.Y / 64;
+			int chunkX = (int)this.player.Center.X / 128;	// 8 tiles
+			int chunkY = (int)this.player.Center.Y / 128;
 
 			if( this.CurrentHouseChunkX == 0 ) {
 				this.CurrentHouseChunkX = chunkX;

@@ -29,6 +29,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					HouseViabilityState state,
 					int fullSpace,
 					int innerSpace,
+					bool verbose,
 					out Color color ) {
 			int minFurnishArea;
 			var config = ErgophobiaConfig.Instance;
@@ -36,7 +37,11 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			switch( state ) {
 			case HouseViabilityState.Good:
 				color = Color.Lime;
-				return "Valid town house space found. Note: Only above ground houses automatically gain occupants.";
+				string msg = "Valid town house space found. It can be furnished with a kit, if needed.";
+				if( verbose ) {
+					msg += "\nNote: Only above ground houses automatically gain occupants.";
+				}
+				return msg;
 			case HouseViabilityState.TooSmall:
 				minFurnishArea = config.Get<int>( nameof(config.MinimumFurnishableHouseArea) );
 				color = Color.Yellow;
