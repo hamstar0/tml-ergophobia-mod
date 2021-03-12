@@ -6,26 +6,10 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using HamstarHelpers.Helpers.Debug;
 using Ergophobia.Protocols;
-using Ergophobia.Items.TrackDeploymentKit;
 
 
 namespace Ergophobia.Tiles {
-	public class TrackDeploymentTile : ModTile {
-		public static void DeployAt( int i, int j, bool isFacingRight, int fromPlayerWho ) {
-			Main.tile[i, j].ClearTile();
-
-			if( Main.netMode == NetmodeID.Server ) {
-				NetMessage.SendTileSquare( -1, i, j, 1 );
-			}
-
-			int leftovers = TrackDeploymentKitItem.Deploy( fromPlayerWho, i, j, isFacingRight );
-			TrackDeploymentKitItem.DropLeftovers( leftovers, i, j );
-		}
-
-
-
-		////////////////
-
+	public partial class TrackDeploymentTile : ModTile {
 		public override void SetDefaults() {
 			//var flags = AnchorType.SolidTile | AnchorType.SolidSide | AnchorType.Tree | AnchorType.AlternateTile | AnchorType.SolidWithTop;
 
@@ -75,65 +59,6 @@ namespace Ergophobia.Tiles {
 			TileObjectData.addAlternate( 0 );*/
 			//
 			TileObjectData.addTile( this.Type );
-		}
-
-
-		public override bool CanPlace( int i, int j ) {
-			if( i > 0 ) {
-				if( j > 0 ) {
-					if( Main.tile[i - 1, j - 1]?.active() == true ) {
-						return true;
-					}
-				}
-				if( Main.tile[i - 1, j]?.active() == true ) {
-					return true;
-				}
-				if( j < Main.maxTilesY - 1 ) {
-					if( Main.tile[i - 1, j + 1]?.active() == true ) {
-						return true;
-					}
-				}
-			}
-
-			if( j > 0 ) {
-				if( Main.tile[i, j - 1]?.active() == true ) {
-					return true;
-				}
-			}
-			if( j < Main.maxTilesY - 1 ) {
-				if( Main.tile[i, j + 1]?.active() == true ) {
-					return true;
-				}
-			}
-
-			if( i < Main.maxTilesX - 1 ) {
-				if( j > 0 ) {
-					if( Main.tile[i + 1, j - 1]?.active() == true ) {
-						return true;
-					}
-				}
-				if( Main.tile[i + 1, j]?.active() == true ) {
-					return true;
-				}
-				if( j < Main.maxTilesY - 1 ) {
-					if( Main.tile[i + 1, j + 1]?.active() == true ) {
-						return true;
-					}
-				}
-			}
-
-			return false;
-		}
-
-
-		public override void PlaceInWorld( int i, int j, Item item ) {
-			bool isFacingRight = Main.LocalPlayer.direction == 1;
-
-			if( Main.netMode == NetmodeID.MultiplayerClient ) {
-				TrackKitDeployProtocol.SendToServer( isFacingRight, i, j, false );
-			} else if( Main.netMode == NetmodeID.SinglePlayer ) {
-				TrackDeploymentTile.DeployAt( i, j, isFacingRight, Main.myPlayer );
-			}
 		}
 	}
 }
