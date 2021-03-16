@@ -9,7 +9,7 @@ using Ergophobia.Tiles;
 
 namespace Ergophobia.Logic {
 	static partial class TileLogic {
-		public static bool CanPlaceOther( int i, int j, int type ) {
+		public static bool CanPlace( int type ) {
 			var config = ErgophobiaConfig.Instance;
 			var wl = config.Get<List<string>>( nameof( config.TilePlaceWhitelist ) );
 

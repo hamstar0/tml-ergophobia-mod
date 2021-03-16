@@ -40,13 +40,14 @@ namespace Ergophobia {
 		public bool IsTrackDeploymentWhitelisted { get; set; } = true;
 
 		public List<string> TilePlaceWhitelist { get; set; } = new List<string> {
+			TileID.GetUniqueKey( TileID.Platforms ),
 			//
 			TileID.GetUniqueKey( TileID.Rope ),
 			TileID.GetUniqueKey( TileID.SilkRope ),
 			TileID.GetUniqueKey( TileID.VineRope ),
 			TileID.GetUniqueKey( TileID.WebRope ),
 			TileID.GetUniqueKey( TileID.Chain ),
-			//TileID.GetUniqueKey( TileID.MinecartTrack ),
+			TileID.GetUniqueKey( TileID.MinecartTrack ),
 			//
 			TileID.GetUniqueKey( TileID.OpenDoor ),
 			TileID.GetUniqueKey( TileID.ClosedDoor ),

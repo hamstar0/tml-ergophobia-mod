@@ -18,6 +18,8 @@ namespace Ergophobia.Logic {
 				return tile.type == TileID.MinecartTrack;
 			}
 
+			//
+
 			var config = ErgophobiaConfig.Instance;
 
 			bool foundGap = false;

@@ -5,6 +5,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Items.Attributes;
+using Ergophobia.Logic;
 
 
 namespace Ergophobia {
@@ -54,8 +55,7 @@ namespace Ergophobia {
 			//
 
 			if( item.createTile > -1 ) {
-				bool canPlace = config.TilePlaceWhitelist.Contains( TileID.GetUniqueKey(item.createTile) );
-				if( !canPlace ) {
+				if( !TileLogic.CanPlace(item.createTile) ) {
 					addTip( "Placeable", "This tile is not allowed to be placed" );
 				}
 			}

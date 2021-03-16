@@ -15,6 +15,10 @@ namespace Ergophobia {
 				return true;
 			}
 
+			if( !TileLogic.CanPlace(type) ) {
+				return false;
+			}
+
 			switch( type ) {
 			case TileID.Platforms:
 				return TileLogic.CanPlacePlatform( i, j, out bool isStair );
@@ -29,7 +33,7 @@ namespace Ergophobia {
 				if( type == ModContent.TileType<FramingPlankTile>() ) {
 					return TileLogic.CanPlaceFramingPlank( i, j );
 				}
-				return TileLogic.CanPlaceOther( i, j, type );
+				return true;
 			}
 		}
 	}
