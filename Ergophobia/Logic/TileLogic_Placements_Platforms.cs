@@ -6,27 +6,26 @@ using HamstarHelpers.Helpers.Debug;
 
 namespace Ergophobia.Logic {
 	static partial class TileLogic {
-		public static bool IsSuitableForPlatform( int tileX, int tileY, int dirX, out bool isStair ) {
+		public static bool IsSuitableForPlatform( int tileX, int tileY, int dirX ) {
 			var config = ErgophobiaConfig.Instance;
 			int max = config.Get<int>( nameof(config.MaxPlatformBridgeLength) );
 			if( max < 0 ) {
-				isStair = false;
 				return true;
 			}
+
+			int climb = 0;
 
 			// Find anchor:
 			for( int i = 1; i <= max; i++ ) {
 				Tile tile = Framing.GetTileSafely( tileX + (i * dirX), tileY );
+
 				if( !tile.active() || !Main.tileSolid[tile.type] ) {
-					tile = Framing.GetTileSafely( tileX + (i * dirX), tileY - 1 );	// above
+					climb--;
+					tile = Framing.GetTileSafely( tileX + (i * dirX), tileY + climb );	// above
+
 					if( !tile.active() || !Main.tileSolid[tile.type] ) {
-						isStair = false;
 						return false;
 					}
-
-					isStair = true;
-				} else {
-					isStair = false;
 				}
 
 				// Anchor found if:
@@ -35,7 +34,6 @@ namespace Ergophobia.Logic {
 				}
 			}
 
-			isStair = false;
 			return false;
 		}
 
@@ -43,14 +41,13 @@ namespace Ergophobia.Logic {
 
 		////////////////
 
-		public static bool CanPlacePlatform( int i, int j, out bool isStair ) {
-			if( TileLogic.IsSuitableForPlatform(i, j, -1, out isStair) ) {
+		public static bool CanPlacePlatform( int i, int j ) {
+			if( TileLogic.IsSuitableForPlatform(i, j, -1) ) {
 				return true;
 			}
-			if( TileLogic.IsSuitableForPlatform(i, j, 1, out isStair) ) {
+			if( TileLogic.IsSuitableForPlatform(i, j, 1) ) {
 				return true;
 			}
-			isStair = false;
 			return false;
 		}
 	}

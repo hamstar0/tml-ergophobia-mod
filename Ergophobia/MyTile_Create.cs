@@ -21,7 +21,7 @@ namespace Ergophobia {
 
 			switch( type ) {
 			case TileID.Platforms:
-				return TileLogic.CanPlacePlatform( i, j, out bool isStair );
+				return TileLogic.CanPlacePlatform( i, j );
 			case TileID.Rope:
 			case TileID.SilkRope:
 			case TileID.VineRope:
