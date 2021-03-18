@@ -73,6 +73,8 @@ namespace Ergophobia.Items.HouseFramingKit {
 			//
 
 			HouseFramingKitItem.MakeHouseSupports( outerRect, floorTileY );
+
+			Main.PlaySound( SoundID.Item108, new Vector2(midTileX*16, floorTileY*16) );
 		}
 
 

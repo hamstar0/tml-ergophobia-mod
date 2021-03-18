@@ -76,6 +76,10 @@ namespace Ergophobia.Items.ScaffoldingKit {
 
 			//
 
+			Main.PlaySound( SoundID.Item69, rect.Center.ToVector2() * 16 );
+
+			//
+
 			if( Main.netMode == NetmodeID.Server ) {
 				NetMessage.SendTileRange(
 					whoAmi: -1,
