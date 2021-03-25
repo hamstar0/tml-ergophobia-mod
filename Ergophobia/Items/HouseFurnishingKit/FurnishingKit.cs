@@ -47,6 +47,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 		public override void SetStaticDefaults() {
 			string tooltip = "Attempts to transform a given space into a spawn point and NPC living area"
 				+ "\nRequires a closed, minimally-sized, unobstructed area"
+				+ "\nTip: Plug gaps with platforms or framing planks to make an area furnishable"
 				+ "\nWarning: This will remove ALL objects within the given area";
 
 			this.DisplayName.SetDefault( "House Furnishing Kit" );

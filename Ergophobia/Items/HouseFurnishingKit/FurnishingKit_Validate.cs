@@ -55,7 +55,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 				return "House too large or not a closed space.";
 			case HouseViabilityState.SmallFloor:
 				color = Color.Yellow;
-				return "Not enough floor space.";
+				return "Not enough floor space. Remember to fill any gaps, if needed.";
 			}
 
 			color = Color.Transparent;
