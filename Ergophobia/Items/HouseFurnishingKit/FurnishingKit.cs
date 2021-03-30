@@ -120,7 +120,9 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					out color
 				);
 
-				Main.NewText( msg, color );
+				foreach( string subMsg in msg.Split('\n') ) {
+					Main.NewText( subMsg, color );
+				}
 			}
 
 			return false;

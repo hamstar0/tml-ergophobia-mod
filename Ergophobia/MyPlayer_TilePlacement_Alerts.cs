@@ -45,7 +45,9 @@ namespace Ergophobia {
 
 					this._FurnishingTipShown = true;
 
-					Main.NewText( msg, color );
+					foreach( string subMsg in msg.Split('\n') ) {
+						Main.NewText( subMsg, color );
+					}
 				}
 			} else {
 				this._HasPreviousHouseViableAlert = false;
