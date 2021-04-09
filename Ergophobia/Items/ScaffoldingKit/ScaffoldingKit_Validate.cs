@@ -10,6 +10,13 @@ using Ergophobia.Tiles;
 
 namespace Ergophobia.Items.ScaffoldingKit {
 	public partial class ScaffoldingErectorKitItem : ModItem {
+		public static int GetFurthestAllowedGroundTileY( int placementTileY ) {
+			return placementTileY + (ScaffoldingErectorKitItem.ScaffoldHeight * 2) + 1;
+		}
+
+
+		////
+
 		public static bool Validate( int tileX, int tileY, out Rectangle area ) {
 			int width = ScaffoldingErectorKitItem.ScaffoldWidth;
 			int height = ScaffoldingErectorKitItem.ScaffoldHeight;
@@ -66,10 +73,8 @@ namespace Ergophobia.Items.ScaffoldingKit {
 
 
 		private static bool ValidateBeneathFloor( int leftTileX, int floorTileY ) {
-			int width = ScaffoldingErectorKitItem.ScaffoldWidth;
-			int height = ScaffoldingErectorKitItem.ScaffoldHeight;
-			int maxX = leftTileX + width;
-			int maxY = floorTileY + (height * 2) + 1;
+			int maxX = leftTileX + ScaffoldingErectorKitItem.ScaffoldWidth;
+			int maxY = ScaffoldingErectorKitItem.GetFurthestAllowedGroundTileY( floorTileY );
 			int framingPlankType = ModContent.TileType<FramingPlankTile>();
 
 			// Find at least one 'earth' tile beneath

@@ -7,6 +7,7 @@ using HamstarHelpers.Helpers.Draw;
 using HamstarHelpers.Helpers.Players;
 using HamstarHelpers.Services.AnimatedColor;
 using Ergophobia.Items.FramingPlank;
+using Ergophobia.Items.ScaffoldingKit;
 
 
 namespace Ergophobia.Logic {
@@ -19,10 +20,10 @@ namespace Ergophobia.Logic {
 		////////////////
 
 		public static void DrawCurrentTilePlacementOutline() {
-			int mouseWorldX = (int)Main.screenPosition.X + Main.mouseX;
-			int mouseWorldY = (int)Main.screenPosition.Y + Main.mouseY;
+			int mouseWorldX = (int)Main.MouseWorld.X;
+			int mouseWorldY = (int)Main.MouseWorld.Y;
 
-			if( !PlayerInteractionHelpers.IsWithinTilePlacementReach( mouseWorldX, mouseWorldY ) ) {
+			if( !PlayerInteractionHelpers.IsWithinTilePlacementReach(mouseWorldX, mouseWorldY) ) {
 				return;
 			}
 
@@ -30,7 +31,10 @@ namespace Ergophobia.Logic {
 			int mouseTileY = mouseWorldY >> 4;
 			float outlineIntensity = 1f;
 
-			if( TilesInterfaceLogic.PlacementOutlineTile.X == mouseTileX && TilesInterfaceLogic.PlacementOutlineTile.Y == mouseTileY ) {
+			bool mouseLingersOverPlacementOutline = TilesInterfaceLogic.PlacementOutlineTile.X == mouseTileX
+				&& TilesInterfaceLogic.PlacementOutlineTile.Y == mouseTileY;
+
+			if( mouseLingersOverPlacementOutline ) {
 				outlineIntensity = 1f - ( (float)TilesInterfaceLogic.PlacementOutlineLinger / 60f );
 				if( outlineIntensity < 0.1f ) {
 					outlineIntensity = 0.1f;
@@ -103,6 +107,15 @@ namespace Ergophobia.Logic {
 					TilesInterfaceLogic.DrawPlankTilePlacementOutline( outlineIntensity );
 				}
 				break;
+			}
+		}
+
+
+		public static void DrawCurrentTilePlacementGuides() {
+			Item heldItem = Main.LocalPlayer.HeldItem;
+
+			if( heldItem.type == ModContent.ItemType<ScaffoldingErectorKitItem>() ) {
+				TilesInterfaceLogic.DrawScaffoldPlacementGuidesIf();
 			}
 		}
 

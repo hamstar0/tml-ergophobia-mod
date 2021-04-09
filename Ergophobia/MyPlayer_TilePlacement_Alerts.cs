@@ -88,7 +88,9 @@ namespace Ergophobia {
 
 			Rectangle area;
 			bool canErect = ScaffoldingErectorKitItem.Validate( tileX, tileY, out area );
-			
+
+			ScaffoldingErectorKitItem.ExpectedPlacementArea = area;
+
 			for( int x=area.Left; x<area.Right; x++ ) {
 				for( int y=area.Top; y<area.Bottom; y++ ) {
 					Dust dust = Dust.NewDustPerfect(

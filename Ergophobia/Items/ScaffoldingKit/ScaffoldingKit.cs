@@ -15,6 +15,11 @@ namespace Ergophobia.Items.ScaffoldingKit {
 		public readonly static int ScaffoldHeight = 6;
 
 
+		////
+
+		internal static Rectangle? ExpectedPlacementArea = null;
+
+
 
 		////////////////
 
@@ -49,7 +54,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 			}
 			return base.UseItem( player );
 		}
-
+		
 		////
 
 		public override bool ConsumeItem( Player player ) {
