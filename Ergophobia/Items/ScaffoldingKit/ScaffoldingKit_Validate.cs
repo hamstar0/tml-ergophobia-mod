@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Tiles;
@@ -37,17 +38,25 @@ namespace Ergophobia.Items.ScaffoldingKit {
 			for( int j = 0; j < height; j++ ) {
 				for( int i = 0; i < width; i++ ) {
 					int x = i + area.X;
-					if( x <= 0 || x >= Main.maxTilesX ) {
-						return false;
-					}
-
 					int y = j + area.Y;
-					if( y <= 0 || y >= Main.maxTilesY ) {
+					if( !WorldGen.InWorld(x, y) ) {
 						return false;
 					}
 
-					if( Main.tile[x, y]?.active() == true ) {
-						return false;
+					Tile tile = Main.tile[x, y];
+					if( tile?.active() == true ) {
+						switch( tile.type ) {
+						case TileID.Grass:
+						case TileID.CorruptGrass:
+						case TileID.FleshGrass:
+						case TileID.HallowedGrass:
+						case TileID.JungleGrass:
+						case TileID.MushroomGrass:
+							//tile.active( false );
+							break;
+						default:
+							return false;
+						}
 					}
 				}
 			}
@@ -66,7 +75,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 			// Find at least one 'earth' tile beneath
 			for( int x=leftTileX; x<maxX; x++ ) {
 				for( int y=floorTileY; y<maxY; y++ ) {
-					Tile tile = Main.tile[x, y];
+					Tile tile = Main.tile[ x, y ];
 					if( tile?.active() != true ) {
 						continue;
 					}

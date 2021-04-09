@@ -19,7 +19,7 @@ namespace Ergophobia {
 
 		private void AddTilePlacementInterfaceLayer( List<GameInterfaceLayer> layers, int layerIdx ) {
 			bool placementUI() {
-				InterfaceLogic.DrawCurrentTilePlacementOutline();
+				TilesInterfaceLogic.DrawCurrentTilePlacementOutline();
 				return true;
 			};
 

@@ -51,7 +51,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 			// Posts
 			if( Main.tile[leftTileX-1, rect.Y].wall != WallID.RichMahoganyFence ) {
 				TileDrawPrimitivesHelpers.DrawRectangle(
-					filter: TilePattern.NonActive,
+					filter: TilePattern.NonSolid,
 					area: new Rectangle( leftTileX, rect.Y, 1, lPostFloorY - rect.Y ),
 					hollow: null,
 					place: ( x, y ) => postTileDef
@@ -59,7 +59,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 			}
 			if( Main.tile[rightTileX + 1, rect.Y].wall != WallID.RichMahoganyFence ) {
 				TileDrawPrimitivesHelpers.DrawRectangle(
-					filter: TilePattern.NonActive,
+					filter: TilePattern.NonSolid,
 					area: new Rectangle( rightTileX, rect.Y, 1, rPostFloorY - rect.Y ),
 					hollow: null,
 					place: ( x, y ) => postTileDef
@@ -68,7 +68,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 
 			// Platforms
 			TileDrawPrimitivesHelpers.DrawRectangle(
-				filter: TilePattern.NonActive,
+				filter: TilePattern.NonSolid,
 				area: new Rectangle( rect.X, rect.Y, width, 1 ),
 				hollow: null,
 				place: ( x, y ) => platTileDef
