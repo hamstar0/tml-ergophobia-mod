@@ -17,9 +17,11 @@ namespace Ergophobia.Items.ScaffoldingKit {
 
 		////
 
-		public static bool Validate( int tileX, int tileY, out Rectangle area ) {
+		public static bool Validate( int tileX, int tileY, int offsetY, out Rectangle area ) {
+			tileY += offsetY;
+
 			int width = ScaffoldingErectorKitItem.ScaffoldWidth;
-			int height = ScaffoldingErectorKitItem.ScaffoldHeight;
+			int height = ScaffoldingErectorKitItem.ScaffoldHeight - offsetY;
 			int leftTileX = Math.Max( tileX - (width / 2), 1 );
 			int floorTileY = ScaffoldingErectorKitItem.FindScaffoldFloorY( leftTileX, tileY, width, height );
 

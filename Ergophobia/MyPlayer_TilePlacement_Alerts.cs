@@ -87,7 +87,12 @@ namespace Ergophobia {
 			int tileY = (int)this.player.position.Y / 16;
 
 			Rectangle area;
-			bool canErect = ScaffoldingErectorKitItem.Validate( tileX, tileY, out area );
+			bool canErect = ScaffoldingErectorKitItem.Validate(
+				tileX: tileX,
+				tileY: tileY,
+				offsetY: ScaffoldingErectorKitItem.PlacementVerticalOffset,
+				area: out area
+			);
 
 			ScaffoldingErectorKitItem.ExpectedPlacementArea = area;
 
