@@ -90,6 +90,10 @@ namespace Ergophobia {
 			TileID.GetUniqueKey( TileID.Campfire ),
 			TileID.GetUniqueKey( TileID.LandMine ),
 			TileID.GetUniqueKey( TileID.HangingLanterns ),
+			TileID.GetUniqueKey( TileID.WaterCandle ),
+			TileID.GetUniqueKey( TileID.PeaceCandle ),
+			TileID.GetUniqueKey( TileID.Candles ),
+			TileID.GetUniqueKey( TileID.PlatinumCandle ),
 			//
 			TileID.GetUniqueKey( TileID.Saplings ),
 			TileID.GetUniqueKey( TileID.Pumpkins ),
