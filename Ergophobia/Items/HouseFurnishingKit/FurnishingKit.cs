@@ -5,7 +5,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
-using Ergophobia.Protocols;
+using Ergophobia.Network;
 
 
 namespace Ergophobia.Items.HouseFurnishingKit {

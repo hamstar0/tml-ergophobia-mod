@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
-using Ergophobia.Protocols;
+using Ergophobia.Network;
 using Ergophobia.Items.TrackDeploymentKit;
 
 

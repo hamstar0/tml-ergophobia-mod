@@ -2,6 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.TModLoader;
 using Ergophobia.Logic;
 using Ergophobia.Tiles;
@@ -10,9 +11,11 @@ using Ergophobia.Tiles;
 namespace Ergophobia {
 	partial class AMTile : GlobalTile {
 		public override bool CanPlace( int i, int j, int type ) {
-			// World gen?
-			if( Main.gameMenu || !LoadHelpers.IsCurrentPlayerInGame() ) {
-				return true;
+			if( Main.netMode != NetmodeID.Server && !Main.dedServ ) {
+				// World gen?
+				if( Main.gameMenu || !LoadHelpers.IsCurrentPlayerInGame() ) {
+					return true;
+				}
 			}
 
 			if( !TileLogic.CanPlace(type) ) {

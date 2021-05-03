@@ -5,7 +5,7 @@ using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 using HamstarHelpers.Helpers.Debug;
-using Ergophobia.Protocols;
+using Ergophobia.Network;
 
 
 namespace Ergophobia.Tiles {

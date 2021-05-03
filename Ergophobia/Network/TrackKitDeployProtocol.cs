@@ -7,7 +7,7 @@ using HamstarHelpers.Helpers.Debug;
 using Ergophobia.Tiles;
 
 
-namespace Ergophobia.Protocols {
+namespace Ergophobia.Network {
 	class TrackKitDeployProtocol : PacketProtocolSendToServer {
 		public static void SendToServer( bool isAimedRight, int tileX, int tileY, bool isRedeploy ) {
 			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModHelpersException( "Not client" ); }

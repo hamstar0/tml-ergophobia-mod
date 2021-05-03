@@ -8,7 +8,7 @@ using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
 using Ergophobia.Items.ScaffoldingKit;
 
 
-namespace Ergophobia.Protocols {
+namespace Ergophobia.Network {
 	class ScaffoldingKitProtocol : PacketProtocolSendToServer {
 		public static void SendToServer( int placeAtTileX, int placeAtTileY, int offsetTileY ) {
 			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModHelpersException( "Not client" ); }

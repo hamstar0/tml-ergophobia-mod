@@ -6,7 +6,7 @@ using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Players;
 using Ergophobia.Items.TrackDeploymentKit;
-using Ergophobia.Protocols;
+using Ergophobia.Network;
 
 
 namespace Ergophobia {

@@ -7,6 +7,7 @@ using HamstarHelpers.Classes.Tiles.TilePattern;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Tiles;
 using HamstarHelpers.Helpers.Tiles.Draw;
+using Ergophobia.Network;
 
 
 namespace Ergophobia.Items.ScaffoldingKit {
@@ -81,13 +82,8 @@ namespace Ergophobia.Items.ScaffoldingKit {
 			//
 
 			if( Main.netMode == NetmodeID.Server ) {
-				NetMessage.SendTileRange(
-					whoAmi: -1,
-					tileX: rect.X,
-					tileY: rect.Y,
-					xSize: rect.Width,
-					ySize: rect.Height
-				);
+LogHelpers.Log( "!!!MakeScaffold " + rect.ToString() );
+				TileRectangleModPacket.Send( rect );
 			}
 		}
 	}

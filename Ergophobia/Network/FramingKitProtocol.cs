@@ -8,7 +8,7 @@ using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
 using Ergophobia.Items.HouseFramingKit;
 
 
-namespace Ergophobia.Protocols {
+namespace Ergophobia.Network {
 	class FramingKitProtocol : PacketProtocolSendToServer {
 		public static void SendToServer( int tileX, int tileY ) {
 			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModHelpersException( "Not client" ); }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Services.Timers;
+using Ergophobia.Network;
 
 
 namespace Ergophobia.Items.HouseFurnishingKit {
@@ -126,24 +128,24 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					int height = (floorY - outerTopLeft.y) + 2;
 
 					Timers.SetTimer( "PrefabKitsFurnishingKitLeft", 30, false, () => {
-						NetMessage.SendTileRange(
-							whoAmi: -1,
-							tileX: outerTopLeft.x,
-							tileY: outerTopLeft.y,
-							xSize: width / 2,
-							ySize: height
-						);
+LogHelpers.Log( "!!!FurnishHouse 1 " + outerTopLeft.ToString()+", "+(width / 2)+", "+height );
+						TileRectangleModPacket.Send( new Rectangle(
+							x: outerTopLeft.x,
+							y: outerTopLeft.y,
+							width: width / 2,
+							height: height
+						) );
 						return false;
 					} );
 
 					Timers.SetTimer( "PrefabKitsFurnishingKitRight", 45, false, () => {
-						NetMessage.SendTileRange(
-							whoAmi: -1,
-							tileX: outerTopLeft.x + (width/2),
-							tileY: outerTopLeft.y,
-							xSize: (width - (width/2)) + 1,
-							ySize: height
-						);
+LogHelpers.Log( "!!!FurnishHouse 2 "+(outerTopLeft.x + (width/2))+", "+outerTopLeft.y+", "+(width / 2)+", "+height );
+						TileRectangleModPacket.Send( new Rectangle(
+							x: outerTopLeft.x + ( width / 2 ),
+							y: outerTopLeft.y,
+							width: (width - (width/2)) + 1,
+							height: height
+						) );
 						return false;
 					} );
 				}

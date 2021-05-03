@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Fx;
 using HamstarHelpers.Services.Timers;
-using Ergophobia.Protocols;
+using Ergophobia.Network;
 
 
 namespace Ergophobia.Items.TrackDeploymentKit {

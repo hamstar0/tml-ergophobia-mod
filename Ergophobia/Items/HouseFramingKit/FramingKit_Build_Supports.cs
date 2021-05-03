@@ -6,6 +6,8 @@ using Terraria.ID;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Classes.Tiles.TilePattern;
 using HamstarHelpers.Helpers.Tiles.Draw;
+using HamstarHelpers.Services.Timers;
+using Ergophobia.Network;
 
 
 namespace Ergophobia.Items.HouseFramingKit {
@@ -70,20 +72,16 @@ namespace Ergophobia.Items.HouseFramingKit {
 			);
 
 			if( Main.netMode == NetmodeID.Server ) {
-				NetMessage.SendTileRange(
-					whoAmi: -1,
-					tileX: supportLeft.X,
-					tileY: supportLeft.Y,
-					xSize: supportLeft.Width,
-					ySize: supportLeft.Height
-				);
-				NetMessage.SendTileRange(
-					whoAmi: -1,
-					tileX: supportRight.X,
-					tileY: supportRight.Y,
-					xSize: supportRight.Width,
-					ySize: supportRight.Height
-				);
+				Timers.SetTimer( 2, false, () => {
+LogHelpers.Log( "!!!MakeHouseSupports 1 " + supportLeft.ToString() );
+					TileRectangleModPacket.Send( supportLeft );
+					return false;
+				} );
+				Timers.SetTimer( 4, false, () => {
+LogHelpers.Log( "!!!MakeHouseSupports 2 " + supportRight.ToString() );
+					TileRectangleModPacket.Send( supportRight );
+					return false;
+				} );
 			}
 		}
 	}

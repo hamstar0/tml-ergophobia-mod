@@ -53,12 +53,21 @@ namespace Ergophobia {
 			TileID.GetUniqueKey( TileID.ClosedDoor ),
 			TileID.GetUniqueKey( TileID.TallGateClosed ),
 			TileID.GetUniqueKey( TileID.TallGateOpen ),
+			//
+			TileID.GetUniqueKey( TileID.Banners ),
+			TileID.GetUniqueKey( TileID.Tombstones ),
+			//
+			TileID.GetUniqueKey( TileID.Cannon ),
+			TileID.GetUniqueKey( TileID.SnowballLauncher ),
+			//
+			TileID.GetUniqueKey( TileID.PiggyBank ),
+			TileID.GetUniqueKey( TileID.Safes ),
+			TileID.GetUniqueKey( TileID.DefendersForge ),
+			//
 			TileID.GetUniqueKey( TileID.CrystalBall ),
 			TileID.GetUniqueKey( TileID.AmmoBox ),
 			TileID.GetUniqueKey( TileID.SharpeningStation ),
 			TileID.GetUniqueKey( TileID.Extractinator ),
-			TileID.GetUniqueKey( TileID.Tombstones ),
-			TileID.GetUniqueKey( TileID.Banners ),
 			TileID.GetUniqueKey( TileID.ImbuingStation ),
 			TileID.GetUniqueKey( TileID.BewitchingTable ),
 			TileID.GetUniqueKey( TileID.AlchemyTable ),
@@ -71,12 +80,7 @@ namespace Ergophobia {
 			TileID.GetUniqueKey( TileID.Autohammer ),
 			TileID.GetUniqueKey( TileID.TinkerersWorkbench ),
 			TileID.GetUniqueKey( TileID.Sawmill ),
-			TileID.GetUniqueKey( TileID.PiggyBank ),
-			TileID.GetUniqueKey( TileID.Safes ),
-			TileID.GetUniqueKey( TileID.DefendersForge ),
 			TileID.GetUniqueKey( TileID.LunarCraftingStation ),
-			TileID.GetUniqueKey( TileID.Cannon ),
-			TileID.GetUniqueKey( TileID.SnowballLauncher ),
 			TileID.GetUniqueKey( TileID.ElderCrystalStand ),
 			//
 			TileID.GetUniqueKey( TileID.Timers ),
