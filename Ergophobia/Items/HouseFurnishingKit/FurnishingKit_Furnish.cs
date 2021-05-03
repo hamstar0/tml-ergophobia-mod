@@ -128,7 +128,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					int height = (floorY - outerTopLeft.y) + 2;
 
 					Timers.SetTimer( "PrefabKitsFurnishingKitLeft", 30, false, () => {
-LogHelpers.Log( "!!!FurnishHouse 1 " + outerTopLeft.ToString()+", "+(width / 2)+", "+height );
+//LogHelpers.Log( "!!!FurnishHouse 1 " + outerTopLeft.ToString()+", "+(width / 2)+", "+height );
 						TileRectangleModPacket.Send( new Rectangle(
 							x: outerTopLeft.x,
 							y: outerTopLeft.y,
@@ -139,7 +139,7 @@ LogHelpers.Log( "!!!FurnishHouse 1 " + outerTopLeft.ToString()+", "+(width / 2)+
 					} );
 
 					Timers.SetTimer( "PrefabKitsFurnishingKitRight", 45, false, () => {
-LogHelpers.Log( "!!!FurnishHouse 2 "+(outerTopLeft.x + (width/2))+", "+outerTopLeft.y+", "+(width / 2)+", "+height );
+//LogHelpers.Log( "!!!FurnishHouse 2 "+(outerTopLeft.x + (width/2))+", "+outerTopLeft.y+", "+(width / 2)+", "+height );
 						TileRectangleModPacket.Send( new Rectangle(
 							x: outerTopLeft.x + ( width / 2 ),
 							y: outerTopLeft.y,

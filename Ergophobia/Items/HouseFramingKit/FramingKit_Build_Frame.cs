@@ -62,7 +62,7 @@ namespace Ergophobia.Items.HouseFramingKit {
 			tile2.slope( 2 );*/
 
 			if( Main.netMode == NetmodeID.Server ) {
-LogHelpers.Log( "!!!MakeHouseFrame "+outerRect.ToString() );
+//LogHelpers.Log( "!!!MakeHouseFrame "+outerRect.ToString() );
 				TileRectangleModPacket.Send( outerRect );
 			}
 

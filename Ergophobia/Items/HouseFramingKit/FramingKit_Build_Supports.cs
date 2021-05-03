@@ -73,12 +73,12 @@ namespace Ergophobia.Items.HouseFramingKit {
 
 			if( Main.netMode == NetmodeID.Server ) {
 				Timers.SetTimer( 2, false, () => {
-LogHelpers.Log( "!!!MakeHouseSupports 1 " + supportLeft.ToString() );
+//LogHelpers.Log( "!!!MakeHouseSupports 1 " + supportLeft.ToString() );
 					TileRectangleModPacket.Send( supportLeft );
 					return false;
 				} );
 				Timers.SetTimer( 4, false, () => {
-LogHelpers.Log( "!!!MakeHouseSupports 2 " + supportRight.ToString() );
+//LogHelpers.Log( "!!!MakeHouseSupports 2 " + supportRight.ToString() );
 					TileRectangleModPacket.Send( supportRight );
 					return false;
 				} );

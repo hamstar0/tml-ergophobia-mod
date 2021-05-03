@@ -82,7 +82,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 			//
 
 			if( Main.netMode == NetmodeID.Server ) {
-LogHelpers.Log( "!!!MakeScaffold " + rect.ToString() );
+//LogHelpers.Log( "!!!MakeScaffold " + rect.ToString() );
 				TileRectangleModPacket.Send( rect );
 			}
 		}

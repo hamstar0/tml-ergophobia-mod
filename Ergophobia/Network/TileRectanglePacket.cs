@@ -18,12 +18,14 @@ namespace Ergophobia.Network {
 			packet.Write( (int)area.Y );
 			packet.Write( (ushort)area.Width );
 			packet.Write( (ushort)area.Height );
-
+			
 			for( int i=area.Left; i<area.Right; i++ ) {
 				for( int j=area.Top; j<area.Bottom; j++ ) {
-					TileHelpers.ToStream( packet, Main.tile[i, j] );
+					TileHelpers.ToStream( packet, Main.tile[i, j], true, true, false );
 				}
 			}
+
+			packet.Send();
 		}
 
 		public static void Receive( BinaryReader reader ) {
@@ -35,7 +37,7 @@ namespace Ergophobia.Network {
 
 			for( int i=area.Left; i<area.Right; i++ ) {
 				for( int j=area.Top; j<area.Bottom; j++ ) {
-					TileHelpers.FromStream( reader, ref Main.tile[i, j] );
+					TileHelpers.FromStream( reader, ref Main.tile[i, j], true, true, false );
 				}
 			}
 		}
