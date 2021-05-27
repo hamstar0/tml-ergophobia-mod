@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
-using HamstarHelpers.Helpers.DotNET.Extensions;
+using ModLibsCore.Libraries.DotNET.Extensions;
 using Ergophobia.Items.TrackDeploymentKit;
 
 

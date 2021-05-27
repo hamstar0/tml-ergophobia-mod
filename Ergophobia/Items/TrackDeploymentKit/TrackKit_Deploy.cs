@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Fx;
-using HamstarHelpers.Services.Timers;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Services.Timers;
+using ModLibsGeneral.Libraries.Fx;
 using Ergophobia.Network;
 
 
@@ -19,7 +19,7 @@ namespace Ergophobia.Items.TrackDeploymentKit {
 			var pos = new Vector2( x << 4, y << 4 );
 
 			Main.PlaySound( SoundID.Item52, pos );
-			ParticleFxHelpers.MakeDustCloud( pos, 1 );
+			ParticleFxLibraries.MakeDustCloud( pos, 1 );
 		}
 
 		public static bool PlaceResumePoint( int x, int y, bool dir ) {

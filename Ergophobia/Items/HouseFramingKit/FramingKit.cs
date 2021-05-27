@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Libraries.Debug;
 using Ergophobia.Network;
 
 
@@ -66,7 +66,7 @@ namespace Ergophobia.Items.HouseFramingKit {
 					FramingKitProtocol.SendToServer( tileX, tileY );
 					return true;
 				} else if( Main.netMode == NetmodeID.Server ) {
-					LogHelpers.Alert( "Server?" );
+					LogLibraries.Alert( "Server?" );
 				}
 			} else {
 				Main.NewText( "Not enough open space.", Color.Yellow );

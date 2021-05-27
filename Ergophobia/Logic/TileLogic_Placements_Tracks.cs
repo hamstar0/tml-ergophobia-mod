@@ -1,7 +1,7 @@
 ﻿using System;
 using Terraria;
 using Terraria.ID;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Libraries.Debug;
 
 
 namespace Ergophobia.Logic {

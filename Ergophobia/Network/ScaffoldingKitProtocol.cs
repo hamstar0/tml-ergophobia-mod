@@ -2,19 +2,20 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Services.Network.SimplePacket;
 using Ergophobia.Items.ScaffoldingKit;
 
 
 namespace Ergophobia.Network {
-	class ScaffoldingKitProtocol : PacketProtocolSendToServer {
+	class ScaffoldingKitProtocol : SimplePacketPayload {
 		public static void SendToServer( int placeAtTileX, int placeAtTileY, int offsetTileY ) {
-			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModHelpersException( "Not client" ); }
+			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModLibsException( "Not client" ); }
 
-			var protocol = new ScaffoldingKitProtocol(  placeAtTileX, placeAtTileY, offsetTileY );
-			protocol.SendToServer( false );
+			var packet = new ScaffoldingKitProtocol(  placeAtTileX, placeAtTileY, offsetTileY );
+
+			SimplePacket.SendToServer( packet );
 		}
 
 
@@ -37,12 +38,9 @@ namespace Ergophobia.Network {
 			this.OffsetTileY = offsetTileY;
 		}
 
-		protected override void InitializeClientSendData() {
-		}
-
 		////
 
-		protected override void Receive( int fromWho ) {
+		public override void ReceiveOnServer( int fromWho ) {
 			Rectangle area;
 			bool isValid = ScaffoldingErectorKitItem.Validate(
 				tileX: this.PlaceAtTileX,
@@ -50,12 +48,16 @@ namespace Ergophobia.Network {
 				offsetY: this.OffsetTileY,
 				area: out area
 			);
-			
+
 			if( isValid ) {
 				ScaffoldingErectorKitItem.MakeScaffold( area.Left, area.Bottom );
 			} else {
-				LogHelpers.Alert( "Could not place house frame" );
+				LogLibraries.Alert( "Could not place house frame" );
 			}
+		}
+
+		public override void ReceiveOnClient() {
+			throw new NotImplementedException();
 		}
 	}
 }

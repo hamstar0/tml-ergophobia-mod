@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Libraries.Debug;
 using Ergophobia.Network;
 
 
@@ -108,7 +108,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					FurnishingKitProtocol.SendToServer( player, tileX, tileY );
 					return true;
 				} else if( Main.netMode == NetmodeID.Server ) {
-					LogHelpers.Alert( "Server?" );
+					LogLibraries.Alert( "Server?" );
 				}
 			} else {
 				Color color;

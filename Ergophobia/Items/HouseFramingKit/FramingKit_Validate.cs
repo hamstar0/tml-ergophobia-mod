@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using HamstarHelpers.Classes.Tiles.TilePattern;
-using HamstarHelpers.Helpers.Tiles.Draw;
-using HamstarHelpers.Helpers.Tiles;
+using ModLibsGeneral.Libraries.Tiles;
+using ModLibsTiles.Classes.Tiles.TilePattern;
+using ModLibsTiles.Libraries.Tiles.Draw;
 
 
 namespace Ergophobia.Items.HouseFramingKit {
@@ -18,7 +18,7 @@ namespace Ergophobia.Items.HouseFramingKit {
 			int dropped = 0;
 
 			// Find ground
-			while( !TileHelpers.IsSolid( Main.tile[leftTileX, floorTileY], true, true ) ) {
+			while( !TileLibraries.IsSolid( Main.tile[leftTileX, floorTileY], true, true ) ) {
 				floorTileY++;
 				dropped++;
 
@@ -41,7 +41,7 @@ namespace Ergophobia.Items.HouseFramingKit {
 			);
 			int availableArea = 0;
 
-			TileDrawPrimitivesHelpers.DrawRectangle(
+			TileDrawPrimitivesLibraries.DrawRectangle(
 				filter: TilePattern.NonActive,
 				area: outerRect,
 				hollow: null,//innerRect,

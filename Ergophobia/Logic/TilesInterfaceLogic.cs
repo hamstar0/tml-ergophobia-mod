@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Draw;
-using HamstarHelpers.Helpers.Players;
-using HamstarHelpers.Services.AnimatedColor;
+using ModLibsGeneral.Libraries.Draw;
+using ModLibsGeneral.Libraries.Players;
+using ModLibsGeneral.Services.AnimatedColor;
 using Ergophobia.Items.FramingPlank;
 using Ergophobia.Items.ScaffoldingKit;
 
@@ -23,7 +23,7 @@ namespace Ergophobia.Logic {
 			int mouseWorldX = (int)Main.MouseWorld.X;
 			int mouseWorldY = (int)Main.MouseWorld.Y;
 
-			if( !PlayerInteractionHelpers.IsWithinTilePlacementReach(mouseWorldX, mouseWorldY) ) {
+			if( !PlayerInteractionLibraries.IsWithinTilePlacementReach(mouseWorldX, mouseWorldY) ) {
 				return;
 			}
 
@@ -140,7 +140,7 @@ namespace Ergophobia.Logic {
 				edgeColor.G = edgeColor.B = 0;
 			}
 
-			DrawHelpers.DrawBorderedRect( Main.spriteBatch, bgColor, edgeColor, scrRect, 2 );
+			DrawLibraries.DrawBorderedRect( Main.spriteBatch, bgColor, edgeColor, scrRect, 2 );
 		}
 	}
 }

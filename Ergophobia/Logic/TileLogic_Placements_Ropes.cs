@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
-using Ergophobia.Tiles;
+using ModLibsCore.Libraries.Debug;
 
 
 namespace Ergophobia.Logic {

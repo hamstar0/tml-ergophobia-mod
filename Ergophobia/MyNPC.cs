@@ -2,7 +2,7 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Libraries.Debug;
 using Ergophobia.Items.HouseFramingKit;
 using Ergophobia.Items.HouseFurnishingKit;
 using Ergophobia.Items.ScaffoldingKit;
@@ -20,7 +20,7 @@ namespace Ergophobia {
 
 			void addToShop( int itemType, ref int myNextSlot ) {
 				if( myNextSlot >= shop.item.Length ) {
-					LogHelpers.Alert( "Merchant shop could not finish setup." );
+					LogLibraries.Alert( "Merchant shop could not finish setup." );
 					return;
 				}
 				

@@ -6,8 +6,8 @@ using ReLogic.Graphics;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Services.AnimatedColor;
+using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Services.AnimatedColor;
 using Ergophobia.Logic;
 using Ergophobia.Items.TrackDeploymentKit;
 

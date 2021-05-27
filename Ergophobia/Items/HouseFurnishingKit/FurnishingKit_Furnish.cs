@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Services.Timers;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Services.Timers;
 using Ergophobia.Network;
 
 
@@ -128,8 +128,8 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					int height = (floorY - outerTopLeft.y) + 2;
 
 					Timers.SetTimer( "PrefabKitsFurnishingKitLeft", 30, false, () => {
-//LogHelpers.Log( "!!!FurnishHouse 1 " + outerTopLeft.ToString()+", "+(width / 2)+", "+height );
-						TileRectangleModPacket.Send( new Rectangle(
+//LogLibraries.Log( "!!!FurnishHouse 1 " + outerTopLeft.ToString()+", "+(width / 2)+", "+height );
+						TileRectangleModPacketProtocol.Send( new Rectangle(
 							x: outerTopLeft.x,
 							y: outerTopLeft.y,
 							width: width / 2,
@@ -139,8 +139,8 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					} );
 
 					Timers.SetTimer( "PrefabKitsFurnishingKitRight", 45, false, () => {
-//LogHelpers.Log( "!!!FurnishHouse 2 "+(outerTopLeft.x + (width/2))+", "+outerTopLeft.y+", "+(width / 2)+", "+height );
-						TileRectangleModPacket.Send( new Rectangle(
+//LogLibraries.Log( "!!!FurnishHouse 2 "+(outerTopLeft.x + (width/2))+", "+outerTopLeft.y+", "+(width / 2)+", "+height );
+						TileRectangleModPacketProtocol.Send( new Rectangle(
 							x: outerTopLeft.x + ( width / 2 ),
 							y: outerTopLeft.y,
 							width: (width - (width/2)) + 1,
@@ -162,22 +162,22 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 				return;
 			}
 
-			LogHelpers.Log( "Could not place "+context+" "
+			LogLibraries.Log( "Could not place "+context+" "
 				+ ( tileType >= TileID.Count || tileType < 0
 					? tileType.ToString()
 					: TileID.Search.GetName(tileType) )
 				+ " at "+tileX+", "+tileY
 			);
 
-			LogHelpers.Log( "  "+(tileX-1)+", "+(tileY-1)+" - "+Main.tile[tileX-1, tileY-1].ToString() );
-			LogHelpers.Log( "  "+(tileX)+", "+(tileY-1)+" - "+Main.tile[tileX, tileY-1].ToString() );
-			LogHelpers.Log( "  "+(tileX+1)+", "+(tileY-1)+" - "+Main.tile[tileX+1, tileY-1].ToString() );
-			LogHelpers.Log( "  "+(tileX-1)+", "+(tileY)+" - "+Main.tile[tileX-1, tileY].ToString() );
-			LogHelpers.Log( "  "+(tileX)+", "+(tileY)+" - "+Main.tile[tileX, tileY].ToString() );
-			LogHelpers.Log( "  "+(tileX+1)+", "+(tileY)+" - "+Main.tile[tileX+1, tileY].ToString() );
-			LogHelpers.Log( "  "+(tileX-1)+", "+(tileY+1)+" - "+Main.tile[tileX-1, tileY+1].ToString() );
-			LogHelpers.Log( "  "+(tileX)+", "+(tileY+1)+" - "+Main.tile[tileX, tileY+1].ToString() );
-			LogHelpers.Log( "  "+(tileX+1)+", "+(tileY+1)+" - "+Main.tile[tileX+1, tileY+1].ToString() );
+			LogLibraries.Log( "  "+(tileX-1)+", "+(tileY-1)+" - "+Main.tile[tileX-1, tileY-1].ToString() );
+			LogLibraries.Log( "  "+(tileX)+", "+(tileY-1)+" - "+Main.tile[tileX, tileY-1].ToString() );
+			LogLibraries.Log( "  "+(tileX+1)+", "+(tileY-1)+" - "+Main.tile[tileX+1, tileY-1].ToString() );
+			LogLibraries.Log( "  "+(tileX-1)+", "+(tileY)+" - "+Main.tile[tileX-1, tileY].ToString() );
+			LogLibraries.Log( "  "+(tileX)+", "+(tileY)+" - "+Main.tile[tileX, tileY].ToString() );
+			LogLibraries.Log( "  "+(tileX+1)+", "+(tileY)+" - "+Main.tile[tileX+1, tileY].ToString() );
+			LogLibraries.Log( "  "+(tileX-1)+", "+(tileY+1)+" - "+Main.tile[tileX-1, tileY+1].ToString() );
+			LogLibraries.Log( "  "+(tileX)+", "+(tileY+1)+" - "+Main.tile[tileX, tileY+1].ToString() );
+			LogLibraries.Log( "  "+(tileX+1)+", "+(tileY+1)+" - "+Main.tile[tileX+1, tileY+1].ToString() );
 		}
 	}
 }

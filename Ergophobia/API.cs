@@ -1,6 +1,6 @@
-﻿using Ergophobia.Items.HouseFurnishingKit;
-using System;
+﻿using System;
 using Terraria;
+using Ergophobia.Items.HouseFurnishingKit;
 
 
 namespace Ergophobia {

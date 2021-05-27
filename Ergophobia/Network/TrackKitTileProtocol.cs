@@ -1,20 +1,20 @@
 ﻿using System;
 using Terraria;
 using Terraria.ID;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Services.Network.SimplePacket;
 using Ergophobia.Items.TrackDeploymentKit;
 
 
 namespace Ergophobia.Network {
-	class TrackKitTileProtocol : PacketProtocolSendToClient {
+	class TrackKitTileProtocol : SimplePacketPayload {
 		public static void SendToClients( int tileX, int tileY ) {
-			if( Main.netMode != NetmodeID.Server ) { throw new ModHelpersException( "Not server" ); }
+			if( Main.netMode != NetmodeID.Server ) { throw new ModLibsException( "Not server" ); }
 
-			var protocol = new TrackKitTileProtocol( tileX, tileY );
+			var packet = new TrackKitTileProtocol( tileX, tileY );
 
-			protocol.SendToClient( -1, -1 );
+			SimplePacket.SendToClient( packet, - 1, -1 );
 		}
 
 
@@ -35,12 +35,14 @@ namespace Ergophobia.Network {
 			this.TileY = tileY;
 		}
 
-		protected override void InitializeServerSendData( int toWho ) { }
-
 
 		////////////////
 
-		protected override void Receive() {
+		public override void ReceiveOnServer( int fromWho ) {
+			throw new NotImplementedException();
+		}
+
+		public override void ReceiveOnClient() {
 			TrackDeploymentKitItem.PlaceTrack( this.TileX, this.TileY );
 		}
 	}

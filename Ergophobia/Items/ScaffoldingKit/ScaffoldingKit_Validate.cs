@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Tiles;
+using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Libraries.Tiles;
 using Ergophobia.Tiles;
 
 
@@ -87,7 +87,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 						continue;
 					}
 
-					if( TileHelpers.IsSolid(tile, false, false) && tile.type != framingPlankType ) {
+					if( TileLibraries.IsSolid(tile, false, false) && tile.type != framingPlankType ) {
 						return true;
 					}
 				}
@@ -106,7 +106,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 			// Find immediate 'ground' (any solid, non-actuated matter)
 			for( int y = tileY; y < maxY; y++ ) {
 				for( int x = leftTileX; x < maxX; x++ ) {
-					if( TileHelpers.IsSolid( Main.tile[x, y], true, false ) ) {
+					if( TileLibraries.IsSolid( Main.tile[x, y], true, false ) ) {
 						return y;
 					}
 				}

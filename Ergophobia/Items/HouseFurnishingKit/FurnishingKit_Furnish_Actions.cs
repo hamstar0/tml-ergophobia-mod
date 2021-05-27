@@ -4,10 +4,11 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.ObjectData;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.DotNET.Extensions;
-using HamstarHelpers.Helpers.Tiles;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.DotNET.Extensions;
+using ModLibsGeneral.Libraries.Tiles;
+using ModLibsGeneral.Libraries.Tiles.Attributes;
 
 
 namespace Ergophobia.Items.HouseFurnishingKit {
@@ -64,7 +65,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 				}
 
 				if( Main.netMode == NetmodeID.Server ) {
-					int? chestTypeRaw = HamstarHelpers.Helpers.Tiles.Attributes.TileAttributeHelpers.GetChestTypeCode( tileType );
+					int? chestTypeRaw = TileAttributeLibraries.GetChestTypeCode( tileType );
 					int? chestType = chestTypeRaw.HasValue ? chestTypeRaw.Value : 0;
 
 					NetMessage.SendData(
@@ -82,8 +83,8 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					);
 				}
 			} else {
-				if( !TilePlacementHelpers.PlaceObject( leftTileX, floorTileY, tileType, 0, direction ) ) {
-					//if( !TilePlacementHelpers.TryPrecisePlace(leftTileX, floorTileY, tileType, style, direction) ) {
+				if( !TilePlacementLibraries.PlaceObject( leftTileX, floorTileY, tileType, 0, direction ) ) {
+					//if( !TilePlacementLibraries.TryPrecisePlace(leftTileX, floorTileY, tileType, style, direction) ) {
 					if( !WorldGen.PlaceTile( leftTileX, floorTileY, tileType ) ) {
 						HouseFurnishingKitItem.OutputPlacementError( leftTileX, floorTileY, tileType, "house tile" );
 						return false;
@@ -125,7 +126,7 @@ Timers.SetTimer( "BLHA_"+tileType, 3, false, () => {
 					int topTileY,
 					ushort tileType,
 					IDictionary<int, ISet<int>> furnishedTiles ) {
-			TilePlacementHelpers.Place3x3Wall( leftTileX, topTileY, tileType, 0 );
+			TilePlacementLibraries.Place3x3Wall( leftTileX, topTileY, tileType, 0 );
 
 			Tile tile = Main.tile[ leftTileX, topTileY ];
 			if( !tile.active() || tile.type != tileType ) {

@@ -1,20 +1,20 @@
 ﻿using System;
 using Terraria;
 using Terraria.ID;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Services.Network.SimplePacket;
 using Ergophobia.Tiles;
 
 
 namespace Ergophobia.Network {
-	class TrackKitDeployProtocol : PacketProtocolSendToServer {
+	class TrackKitDeployProtocol : SimplePacketPayload {
 		public static void SendToServer( bool isAimedRight, int tileX, int tileY, bool isRedeploy ) {
-			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModHelpersException( "Not client" ); }
+			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModLibsException( "Not client" ); }
 
-			var protocol = new TrackKitDeployProtocol( isAimedRight, tileX, tileY, isRedeploy );
+			var packet = new TrackKitDeployProtocol( isAimedRight, tileX, tileY, isRedeploy );
 
-			protocol.SendToServer( true );
+			SimplePacket.SendToServer( packet );
 		}
 
 
@@ -39,13 +39,15 @@ namespace Ergophobia.Network {
 			this.IsRedeploy = isRedeploy;
 		}
 
-		protected override void InitializeClientSendData() { }
-
 
 		////////////////
 
-		protected override void Receive( int fromWho ) {
+		public override void ReceiveOnServer( int fromWho ) {
 			TrackDeploymentTile.DeployAt( this.TileX, this.TileY, this.IsAimedRight, fromWho );
+		}
+
+		public override void ReceiveOnClient() {
+			throw new NotImplementedException();
 		}
 	}
 }

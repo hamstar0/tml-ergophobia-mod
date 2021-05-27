@@ -1,6 +1,6 @@
 ﻿using System;
-using HamstarHelpers.Classes.Loadable;
-using HamstarHelpers.Services.Hooks.ExtendedHooks;
+using ModLibsCore.Classes.Loadable;
+using ModLibsGeneral.Services.Hooks.ExtendedHooks;
 
 
 namespace Ergophobia {

@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Players;
+using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Libraries.Players;
 using Ergophobia.Items.TrackDeploymentKit;
 using Ergophobia.Network;
 
@@ -24,7 +24,7 @@ namespace Ergophobia {
 				return;
 			}
 
-			PlayerItemHelpers.RemoveInventoryItemQuantity( this.player, heldTrackKitItemType, 1 );
+			PlayerItemLibraries.RemoveInventoryItemQuantity( this.player, heldTrackKitItemType, 1 );
 
 			int leftovers = TrackDeploymentKitItem.Redeploy( this.player.whoAmI );
 			if( leftovers == 0 ) {

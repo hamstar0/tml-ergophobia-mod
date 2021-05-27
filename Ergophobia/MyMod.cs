@@ -3,7 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.TModLoader.Mods;
+using ModLibsCore.Libraries.TModLoader.Mods;
 using Ergophobia.Recipes;
 using Ergophobia.Items.HouseFurnishingKit;
 using Ergophobia.Network;
@@ -51,14 +51,14 @@ namespace Ergophobia {
 		////////////////
 
 		public override object Call( params object[] args ) {
-			return ModBoilerplateHelpers.HandleModCall( typeof(ErgophobiaAPI), args );
+			return ModBoilerplateLibraries.HandleModCall( typeof(ErgophobiaAPI), args );
 		}
 
 
 		////////////////
 
 		public override void HandlePacket( BinaryReader reader, int whoAmI ) {
-			TileRectangleModPacket.Receive( reader );
+			TileRectangleModPacketProtocol.Receive( reader );
 		}
 	}
 }

@@ -3,10 +3,11 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Classes.Tiles.TilePattern;
-using HamstarHelpers.Helpers.Tiles.Draw;
-using HamstarHelpers.Services.Timers;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Services.Timers;
+using ModLibsGeneral.Libraries.Tiles.Attributes;
+using ModLibsTiles.Classes.Tiles.TilePattern;
+using ModLibsTiles.Libraries.Tiles.Draw;
 using Ergophobia.Network;
 
 
@@ -28,7 +29,7 @@ namespace Ergophobia.Items.HouseFramingKit {
 				}
 
 				if( Main.tile[x, y].active() ) {
-					if( HamstarHelpers.Helpers.Tiles.Attributes.TileAttributeHelpers.IsBreakable(x, y) ) {
+					if( TileAttributeLibraries.IsBreakable(x, y) ) {
 						WorldGen.KillTile( x, y, false, false, true );
 					} else {
 						floorLeft = y;
@@ -46,7 +47,7 @@ namespace Ergophobia.Items.HouseFramingKit {
 				}
 
 				if( Main.tile[x, y].active() ) {
-					if( HamstarHelpers.Helpers.Tiles.Attributes.TileAttributeHelpers.IsBreakable(x, y) ) {
+					if( TileAttributeLibraries.IsBreakable(x, y) ) {
 						WorldGen.KillTile( x, y, false, false, true );
 					} else {
 						floorRight = y;
@@ -58,13 +59,13 @@ namespace Ergophobia.Items.HouseFramingKit {
 
 			//
 
-			TileDrawPrimitivesHelpers.DrawRectangle(
+			TileDrawPrimitivesLibraries.DrawRectangle(
 				filter: TilePattern.Any,
 				area: supportLeft,
 				hollow: null,
 				place: getSupportLeftDef
 			);
-			TileDrawPrimitivesHelpers.DrawRectangle(
+			TileDrawPrimitivesLibraries.DrawRectangle(
 				filter: TilePattern.Any,
 				area: supportRight,
 				hollow: null,
@@ -73,13 +74,13 @@ namespace Ergophobia.Items.HouseFramingKit {
 
 			if( Main.netMode == NetmodeID.Server ) {
 				Timers.SetTimer( 2, false, () => {
-//LogHelpers.Log( "!!!MakeHouseSupports 1 " + supportLeft.ToString() );
-					TileRectangleModPacket.Send( supportLeft );
+//LogLibraries.Log( "!!!MakeHouseSupports 1 " + supportLeft.ToString() );
+					TileRectangleModPacketProtocol.Send( supportLeft );
 					return false;
 				} );
 				Timers.SetTimer( 4, false, () => {
-//LogHelpers.Log( "!!!MakeHouseSupports 2 " + supportRight.ToString() );
-					TileRectangleModPacket.Send( supportRight );
+//LogLibraries.Log( "!!!MakeHouseSupports 2 " + supportRight.ToString() );
+					TileRectangleModPacketProtocol.Send( supportRight );
 					return false;
 				} );
 			}

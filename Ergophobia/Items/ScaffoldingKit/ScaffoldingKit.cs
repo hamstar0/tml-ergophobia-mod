@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Libraries.Debug;
 using Ergophobia.Network;
 
 
@@ -89,7 +89,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
 					ScaffoldingKitProtocol.SendToServer( tileX, tileY, offsetY );
 				} else if( Main.netMode == NetmodeID.Server ) {
-					LogHelpers.Alert( "Server?" );
+					LogLibraries.Alert( "Server?" );
 				}
 			} else {
 				Main.NewText( "Invalid location.", Color.Yellow );

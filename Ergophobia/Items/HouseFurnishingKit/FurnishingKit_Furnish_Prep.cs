@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Libraries.Tiles.Attributes;
 
 
 namespace Ergophobia.Items.HouseFurnishingKit {
@@ -18,7 +19,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 
 				if( tile.type == TileID.Containers || tile.type == TileID.Containers2 ) {
 					if( Main.netMode == NetmodeID.Server ) {
-						int? chestTypeRaw = HamstarHelpers.Helpers.Tiles.Attributes.TileAttributeHelpers.GetChestTypeCode(tile.type);
+						int? chestTypeRaw = TileAttributeLibraries.GetChestTypeCode(tile.type);
 						int? chestType = chestTypeRaw.HasValue ? chestTypeRaw.Value : 0;
 
 						NetMessage.SendData(

@@ -3,9 +3,10 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Classes.Tiles.TilePattern;
-using HamstarHelpers.Helpers.Tiles.Draw;
+using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Libraries.Tiles;
+using ModLibsTiles.Classes.Tiles.TilePattern;
+using ModLibsTiles.Libraries.Tiles.Draw;
 using Ergophobia.Network;
 
 
@@ -35,19 +36,19 @@ namespace Ergophobia.Items.HouseFramingKit {
 
 			//
 
-			TileDrawPrimitivesHelpers.DrawRectangle(
+			TileDrawPrimitivesLibraries.DrawRectangle(
 				filter: TilePattern.NonActive,
 				area: outerRect,
 				hollow: innerRect,
 				place: (x, y) => isSolidFrame(x, y) ? frameTileDef : null
 			);
-			TileDrawPrimitivesHelpers.DrawRectangle(
+			TileDrawPrimitivesLibraries.DrawRectangle(
 				filter: TilePattern.NonActive,
 				area: outerRect,
 				hollow: null,
 				place: ( int x, int y ) => HouseFramingKitItem.GetHouseFrameTileDefAt1(x, y, width, height, outerRect)
 			);
-			TileDrawPrimitivesHelpers.DrawRectangle(
+			TileDrawPrimitivesLibraries.DrawRectangle(
 				filter: TilePattern.NonActive,
 				area: outerRect,
 				hollow: null,
@@ -62,8 +63,8 @@ namespace Ergophobia.Items.HouseFramingKit {
 			tile2.slope( 2 );*/
 
 			if( Main.netMode == NetmodeID.Server ) {
-//LogHelpers.Log( "!!!MakeHouseFrame "+outerRect.ToString() );
-				TileRectangleModPacket.Send( outerRect );
+//LogLibraries.Log( "!!!MakeHouseFrame "+outerRect.ToString() );
+				TileRectangleModPacketProtocol.Send( outerRect );
 			}
 
 			//
@@ -138,13 +139,13 @@ Timers.SetTimer( "HFK0_"+x+"_"+y, 2, false, () => {
 						myTileDef = new TileDrawDefinition {
 							TileType = TileID.Platforms,
 							TileStyle = 0,
-							Slope = HamstarHelpers.Helpers.Tiles.TileSlopeType.TopRightSlope
+							Shape = TileShapeType.TopRightSlope
 						};
 					} else if( offX == (midRight-2) ) {
 						myTileDef = new TileDrawDefinition {
 							TileType = TileID.Platforms,
 							TileStyle = 0,
-							Slope = HamstarHelpers.Helpers.Tiles.TileSlopeType.TopLeftSlope
+							Shape = TileShapeType.TopLeftSlope
 						};
 					} else {
 						myTileDef = new TileDrawDefinition {

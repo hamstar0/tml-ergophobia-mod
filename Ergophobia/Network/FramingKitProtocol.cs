@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Classes.Protocols.Packet.Interfaces;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Services.Network.SimplePacket;
 using Ergophobia.Items.HouseFramingKit;
 
 
 namespace Ergophobia.Network {
-	class FramingKitProtocol : PacketProtocolSendToServer {
+	class FramingKitProtocol : SimplePacketPayload {
 		public static void SendToServer( int tileX, int tileY ) {
-			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModHelpersException( "Not client" ); }
+			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModLibsException( "Not client" ); }
 
-			var protocol = new FramingKitProtocol(  tileX, tileY );
-			protocol.SendToServer( false );
+			var packet = new FramingKitProtocol(  tileX, tileY );
+
+			SimplePacket.SendToServer( packet );
 		}
 
 
@@ -35,20 +36,21 @@ namespace Ergophobia.Network {
 			this.TileY = tileY;
 		}
 
-		protected override void InitializeClientSendData() {
-		}
-
 		////
 
-		protected override void Receive( int fromWho ) {
+		public override void ReceiveOnServer( int fromWho ) {
 			ISet<(int TileX, int TileY)> houseTiles;
 			bool isValid = HouseFramingKitItem.Validate( ref this.TileX, ref this.TileY, out houseTiles );
 
 			if( isValid ) {
 				HouseFramingKitItem.MakeHouseFrame( this.TileX, this.TileY );
 			} else {
-				LogHelpers.Alert( "Could not place house frame" );
+				LogLibraries.Alert( "Could not place house frame" );
 			}
+		}
+
+		public override void ReceiveOnClient() {
+			throw new NotImplementedException();
 		}
 	}
 }

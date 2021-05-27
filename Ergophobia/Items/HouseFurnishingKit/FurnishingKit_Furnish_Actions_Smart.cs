@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.DotNET.Extensions;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.DotNET.Extensions;
 
 
 namespace Ergophobia.Items.HouseFurnishingKit {
@@ -25,7 +25,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 				furnishedTiles
 			);
 //if( result.success ) {
-//LogHelpers.Log( "Placed "+result.tileType+" at "+result.x+", "+result.y+" (was "+tileX+", "+tileY+")" );
+//LogLibraries.Log( "Placed "+result.tileType+" at "+result.x+", "+result.y+" (was "+tileX+", "+tileY+")" );
 //}
 
 			return result.success;

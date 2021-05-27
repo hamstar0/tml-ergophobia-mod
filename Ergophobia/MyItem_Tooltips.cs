@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Items.Attributes;
+using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Libraries.Items.Attributes;
 using Ergophobia.Logic;
 
 
@@ -25,7 +25,7 @@ namespace Ergophobia {
 
 			void addTip( string ctx, string desc ) {
 				TooltipLine tip = new TooltipLine( this.mod, "Ergophobia"+ctx, modName + desc );
-				ItemInformationAttributeHelpers.ApplyTooltipAt( tooltips, tip );
+				ItemInformationAttributeLibraries.ApplyTooltipAt( tooltips, tip );
 			}
 
 			//

@@ -5,10 +5,10 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Tiles;
-using HamstarHelpers.Classes.Tiles.TilePattern;
-using HamstarHelpers.Helpers.Tiles.Walls;
-using HamstarHelpers.Services.Timers;
+using ModLibsCore.Services.Timers;
+using ModLibsGeneral.Libraries.Tiles.Walls.Attributes;
+using ModLibsTiles.Classes.Tiles.TilePattern;
+using ModLibsTiles.Libraries.Tiles;
 
 
 namespace Ergophobia.Items.HouseFurnishingKit {
@@ -112,7 +112,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			case TileID.MagicalIceBlock:
 				return true;
 			default:
-				if( TileGroupIdentityHelpers.VanillaShrubTiles.Contains( tile.type ) ) {
+				if( TileGroupIdentityLibraries.VanillaShrubTiles.Contains( tile.type ) ) {
 					return true;
 				}
 				break;
@@ -165,7 +165,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 
 			bool isStairOrNotSolid( int x, int y ) {
 				Tile tile = Main.tile[ x, y ];
-				if( TileWallGroupIdentityHelpers.UnsafeDungeonWallTypes.Contains( tile.wall ) ) {
+				if( TileWallAttributeLibraries.UnsafeDungeonWallTypes.Contains( tile.wall ) ) {
 					return false;
 				}
 				if( tile.wall == WallID.LihzahrdBrickUnsafe ) {
@@ -223,7 +223,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 
 			//
 
-			IList<(ushort TileX, ushort TileY)> unsafeChestTiles = TileFinderHelpers.GetTileMatchesInWorldRectangle(
+			IList<(ushort TileX, ushort TileY)> unsafeChestTiles = TileFinderLibraries.GetTileMatchesInWorldRectangle(
 				pattern: new TilePattern( new TilePatternBuilder {
 					CustomCheck = containsUnsafeChest
 				} ),
@@ -291,7 +291,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					out int floorX,
 					out int floorY ) {
 			ISet<(ushort TileX, ushort TileY)> unclosedTiles;
-			houseSpace = TileFinderHelpers.GetAllContiguousMatchingTilesAt(
+			houseSpace = TileFinderLibraries.GetAllContiguousMatchingTilesAt(
 				pattern: pattern,
 				tileX: tileX,
 				tileY: tileY,
@@ -309,7 +309,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 				return HouseViabilityState.TooSmall;
 			}
 
-			int floorWidth = TileFinderHelpers.GetFloorWidth(
+			int floorWidth = TileFinderLibraries.GetFloorWidth(
 				nonFloorPattern: pattern,
 				tileX: tileX,
 				tileY: tileY - 2,

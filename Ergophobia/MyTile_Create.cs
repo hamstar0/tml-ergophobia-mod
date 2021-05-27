@@ -2,8 +2,8 @@
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.TModLoader;
+using ModLibsCore.Libraries.Debug;
+using ModLibsCore.Libraries.TModLoader;
 using Ergophobia.Logic;
 using Ergophobia.Tiles;
 
@@ -13,7 +13,7 @@ namespace Ergophobia {
 		public override bool CanPlace( int i, int j, int type ) {
 			if( Main.netMode != NetmodeID.Server && !Main.dedServ ) {
 				// World gen?
-				if( Main.gameMenu || !LoadHelpers.IsCurrentPlayerInGame() ) {
+				if( Main.gameMenu || !LoadLibraries.IsCurrentPlayerInGame() ) {
 					return true;
 				}
 			}

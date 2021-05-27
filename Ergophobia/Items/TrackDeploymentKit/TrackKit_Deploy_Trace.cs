@@ -4,8 +4,8 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Classes.Tiles.TilePattern;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Libraries.Debug;
+using ModLibsTiles.Classes.Tiles.TilePattern;
 
 
 namespace Ergophobia.Items.TrackDeploymentKit {

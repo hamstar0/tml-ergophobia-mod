@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using HamstarHelpers.Helpers.Debug;
+using ModLibsCore.Libraries.Debug;
 using Ergophobia.Items.HouseFramingKit;
 using Ergophobia.Items.HouseFurnishingKit;
 using Ergophobia.Items.ScaffoldingKit;

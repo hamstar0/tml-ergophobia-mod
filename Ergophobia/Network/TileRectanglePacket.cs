@@ -4,13 +4,13 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Tiles;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Libraries.Tiles;
 
 
 namespace Ergophobia.Network {
-	class TileRectangleModPacket {
+	class TileRectangleModPacketProtocol {
 		public static void Send( Rectangle area ) {
 			ModPacket packet = ErgophobiaMod.Instance.GetPacket();
 
@@ -21,7 +21,7 @@ namespace Ergophobia.Network {
 			
 			for( int i=area.Left; i<area.Right; i++ ) {
 				for( int j=area.Top; j<area.Bottom; j++ ) {
-					TileHelpers.ToStream( packet, Main.tile[i, j], true, true, false );
+					TileStreamLibraries.ToStream( packet, Main.tile[i, j], true, true, false );
 				}
 			}
 
@@ -37,7 +37,7 @@ namespace Ergophobia.Network {
 
 			for( int i=area.Left; i<area.Right; i++ ) {
 				for( int j=area.Top; j<area.Bottom; j++ ) {
-					TileHelpers.FromStream( reader, ref Main.tile[i, j], true, true, false );
+					TileStreamLibraries.FromStream( reader, ref Main.tile[i, j], true, true, false );
 				}
 			}
 		}

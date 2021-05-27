@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ID;
-using HamstarHelpers.Classes.Errors;
-using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Helpers.Tiles;
+using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Libraries.Tiles;
 
 
 namespace Ergophobia.Items.HouseFurnishingKit {
@@ -78,15 +78,15 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			(bool, int) placeTile( int x, int y ) {
 				switch( tileType ) {
 				case TileID.Bottles:
-					TilePlacementHelpers.Place2x1( x, y, TileID.WorkBenches );
+					TilePlacementLibraries.Place2x1( x, y, TileID.WorkBenches );
 					if( WorldGen.PlaceTile( x, y - 1, TileID.Bottles ) ) {
 						HouseFurnishingKitItem.MarkFurnishedTiles( x, y - 1, 2, 2, occupiedTiles );
 						return (true, tileType);
 					}
 					break;
 				case TileID.PiggyBank:
-					TilePlacementHelpers.Place2x1( x, y, TileID.WorkBenches );
-					TilePlacementHelpers.Place2x1( x, y - 1, TileID.PiggyBank );
+					TilePlacementLibraries.Place2x1( x, y, TileID.WorkBenches );
+					TilePlacementLibraries.Place2x1( x, y - 1, TileID.PiggyBank );
 					if( Main.tile[x, y].type == TileID.WorkBenches ) {
 						HouseFurnishingKitItem.MarkFurnishedTiles( x, y - 1, 2, 2, occupiedTiles );
 						return (true, tileType);
