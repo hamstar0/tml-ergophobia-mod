@@ -8,6 +8,7 @@ using Ergophobia.Tiles;
 
 
 namespace Ergophobia.Network {
+	[Serializable]
 	class TrackKitDeployProtocol : SimplePacketPayload {
 		public static void SendToServer( bool isAimedRight, int tileX, int tileY, bool isRedeploy ) {
 			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModLibsException( "Not client" ); }

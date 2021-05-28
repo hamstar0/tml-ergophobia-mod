@@ -9,6 +9,7 @@ using Ergophobia.Items.ScaffoldingKit;
 
 
 namespace Ergophobia.Network {
+	[Serializable]
 	class ScaffoldingKitProtocol : SimplePacketPayload {
 		public static void SendToServer( int placeAtTileX, int placeAtTileY, int offsetTileY ) {
 			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModLibsException( "Not client" ); }

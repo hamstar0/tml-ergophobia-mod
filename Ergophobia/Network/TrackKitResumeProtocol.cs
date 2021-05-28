@@ -8,6 +8,7 @@ using Ergophobia.Items.TrackDeploymentKit;
 
 
 namespace Ergophobia.Network {
+	[Serializable]
 	class TrackKitResumeProtocol : SimplePacketPayload {
 		public static void SendToClient( int fromPlayerWho, int tileX, int tileY, bool isAimedRight ) {
 			if( Main.netMode != NetmodeID.Server ) { throw new ModLibsException( "Not server" ); }

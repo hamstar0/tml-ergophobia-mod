@@ -9,6 +9,7 @@ using Ergophobia.Items.HouseFurnishingKit;
 
 
 namespace Ergophobia.Network {
+	[Serializable]
 	class FurnishingKitProtocol : SimplePacketPayload {
 		public static void SendToServer( Player player, int tileX, int tileY ) {
 			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModLibsException( "Not client" ); }
