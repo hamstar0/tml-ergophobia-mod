@@ -6,6 +6,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using ModLibsCore.Services.Timers;
+using ModLibsGeneral.Libraries.Tiles;
 using ModLibsGeneral.Libraries.Tiles.Walls.Attributes;
 using ModLibsTiles.Classes.Tiles.TilePattern;
 using ModLibsTiles.Libraries.Tiles;
@@ -112,7 +113,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			case TileID.MagicalIceBlock:
 				return true;
 			default:
-				if( TileGroupIdentityLibraries.VanillaShrubTiles.Contains( tile.type ) ) {
+				if( TileCommonGroupsLibraries.VanillaShrubTiles.Contains( tile.type ) ) {
 					return true;
 				}
 				break;
