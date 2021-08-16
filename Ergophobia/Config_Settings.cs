@@ -36,8 +36,8 @@ namespace Ergophobia {
 		public int HouseFurnishingKitPrice { get; set; } = 100000;  //Item.buyPrice( 0, 10, 0, 0 );
 
 		[Range( 0, 99999999 )]
-		[DefaultValue( 7500 )]
-		public int ScaffoldingKitPrice { get; set; } = 7500;	//Item.buyPrice( 0, 0, 75, 0 );
+		[DefaultValue( 5000 )]
+		public int ScaffoldingKitPrice { get; set; } = 5000;	//Item.buyPrice( 0, 0, 50, 0 );
 
 		[Range( 0, 99999999 )]
 		[DefaultValue( 15000 )]
