@@ -11,21 +11,14 @@ using Ergophobia.Logic;
 namespace Ergophobia {
 	partial class ErgophobiaItem : GlobalItem {
 		public override void ModifyTooltips( Item item, List<TooltipLine> tooltips ) {
-			this.AddCustomTooltips( item, tooltips );
-		}
-
-
-		////////////////
-
-		private void AddCustomTooltips( Item item, List<TooltipLine> tooltips ) {
-			ErgophobiaConfig config = ErgophobiaConfig.Instance;
+			var config = ErgophobiaConfig.Instance;
 			string modName = "[c/FFFF88:" + ErgophobiaMod.Instance.DisplayName + "] - ";
 
 			//
 
 			void addTip( string ctx, string desc ) {
 				TooltipLine tip = new TooltipLine( this.mod, "Ergophobia"+ctx, modName + desc );
-				ItemInformationAttributeLibraries.ApplyTooltipAt( tooltips, tip );
+				ItemInformationAttributeLibraries.AppendTooltipAtEnd( tooltips, tip );
 			}
 
 			//
@@ -54,7 +47,7 @@ namespace Ergophobia {
 
 			//
 
-			if( item.createTile > -1 ) {
+			if( item.createTile >= 0 ) {
 				if( !TileLogic.CanPlace(item.createTile) ) {
 					addTip( "Placeable", "This tile is not allowed to be placed" );
 				}

@@ -58,7 +58,11 @@ namespace Ergophobia {
 				return true;
 			};
 
-			var tradeLayer = new LegacyGameInterfaceLayer( "Ergophobia: Placement Indicators", placementUI, InterfaceScaleType.UI );
+			var tradeLayer = new LegacyGameInterfaceLayer(
+				"Ergophobia: Placement Indicators",
+				placementUI,
+				InterfaceScaleType.Game
+			);
 			layers.Insert( layerIdx, tradeLayer );
 		}
 	}
