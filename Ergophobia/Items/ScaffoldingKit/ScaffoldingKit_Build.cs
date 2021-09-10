@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using ModLibsCore.Libraries.Debug;
+using ModLibsGeneral.Libraries.Misc;
 using ModLibsGeneral.Libraries.Tiles;
 using ModLibsTiles.Classes.Tiles.TilePattern;
 using ModLibsTiles.Libraries.Tiles.Draw;
@@ -22,13 +23,16 @@ namespace Ergophobia.Items.ScaffoldingKit {
 				height
 			);
 
+			sbyte paintId = (sbyte)PaintLibraries.GetNearestPaintType( Color.White );
 			var postTileDef = new TileDrawDefinition {
 				NotActive = true,
-				WallType = WallID.RichMahoganyFence
+				WallType = WallID.RichMahoganyFence,
+				PaintWall = paintId
 			};
 			var platTileDef = new TileDrawDefinition {
 				SkipWall = true,
-				TileType = TileID.Platforms
+				TileType = TileID.Platforms,
+				PaintTile = paintId
 			};
 
 			//

@@ -44,7 +44,7 @@ namespace Ergophobia {
 		////////////////
 
 		public override void ModifyInterfaceLayers( List<GameInterfaceLayer> layers ) {
-			int idx = layers.FindIndex( layer => layer.Name.Equals( "Vanilla: Inventory" ) );
+			int idx = layers.FindIndex( layer => layer.Name.Equals("Vanilla: Inventory") );
 			if( idx != -1 ) {
 				this.AddTilePlacementInterfaceLayer( layers, idx + 1 );
 			}
