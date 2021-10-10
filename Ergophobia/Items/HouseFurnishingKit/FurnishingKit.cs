@@ -25,7 +25,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 					ISet<(ushort TileX, ushort TileY)> fullHouseSpace,
 					int floorX,
 					int floorY ) {
-			foreach( Func<int, int, bool> func in ErgophobiaMod.Instance.OnPreHouseFurnish ) {
+			foreach( HouseFurnishingKitItem.PreFurnishHouse func in ErgophobiaMod.Instance.OnPreHouseFurnish ) {
 				if( !func( tileX, tileY ) ) {
 					return false;
 				}

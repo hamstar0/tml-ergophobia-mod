@@ -21,7 +21,9 @@ namespace Ergophobia.Network {
 			
 			for( int i=area.Left; i<area.Right; i++ ) {
 				for( int j=area.Top; j<area.Bottom; j++ ) {
-					TileStreamLibraries.ToStream( packet, Main.tile[i, j], true, true, false );
+					Tile tile = Framing.GetTileSafely( i, j );
+
+					TileStreamLibraries.ToStream( packet, tile, true, true, false );
 				}
 			}
 
@@ -37,7 +39,9 @@ namespace Ergophobia.Network {
 
 			for( int i=area.Left; i<area.Right; i++ ) {
 				for( int j=area.Top; j<area.Bottom; j++ ) {
-					TileStreamLibraries.FromStream( reader, ref Main.tile[i, j], true, true, false );
+					Tile tile = Framing.GetTileSafely( i, j );
+
+					TileStreamLibraries.FromStream( reader, ref tile, true, true, false );
 				}
 			}
 		}

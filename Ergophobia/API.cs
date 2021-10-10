@@ -5,10 +5,10 @@ using Ergophobia.Items.HouseFurnishingKit;
 
 namespace Ergophobia {
 	public class ErgophobiaAPI {
-		public static void OnPreHouseFurnish( Func<int, int, bool> func ) {
+		public static void OnPreHouseFurnish( HouseFurnishingKitItem.PreFurnishHouse func ) {
 			ErgophobiaMod.Instance.OnPreHouseFurnish.Add( func );
 		}
-
+		
 
 		public static void OnPostHouseFurnish( HouseFurnishingKitItem.OnFurnishHouse action ) {
 			ErgophobiaMod.Instance.OnPostHouseFurnish.Add( action );

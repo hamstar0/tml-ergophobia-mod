@@ -11,6 +11,9 @@ using Ergophobia.Network;
 
 namespace Ergophobia.Items.HouseFurnishingKit {
 	public partial class HouseFurnishingKitItem : ModItem {
+		public delegate bool PreFurnishHouse( int tileX, int tileY );
+
+
 		public delegate void OnFurnishHouse(
 			(int x, int y) innerTopLeft,
 			(int x, int y) innerTopRight,

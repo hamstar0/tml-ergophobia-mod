@@ -24,7 +24,7 @@ namespace Ergophobia {
 
 		////////////////
 
-		internal IList<Func<int, int, bool>> OnPreHouseFurnish = new List<Func<int, int, bool>>();
+		internal IList<HouseFurnishingKitItem.PreFurnishHouse> OnPreHouseFurnish = new List<HouseFurnishingKitItem.PreFurnishHouse>();
 		internal IList<HouseFurnishingKitItem.OnFurnishHouse> OnPostHouseFurnish = new List<HouseFurnishingKitItem.OnFurnishHouse>();
 
 
