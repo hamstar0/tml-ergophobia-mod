@@ -1,6 +1,7 @@
 ﻿using System;
 using Terraria;
 using Ergophobia.Items.HouseFurnishingKit;
+using Ergophobia.Logic;
 
 
 namespace Ergophobia {
@@ -12,6 +13,13 @@ namespace Ergophobia {
 
 		public static void OnPostHouseFurnish( HouseFurnishingKitItem.OnFurnishHouse action ) {
 			ErgophobiaMod.Instance.OnPostHouseFurnish.Add( action );
+		}
+
+
+		////////////////
+		
+		public static bool CanPlaceRope( int tileX, int tileY ) {
+			return TileLogic.CanPlaceRope( tileX, tileY );
 		}
 	}
 }
