@@ -5,15 +5,20 @@ using Terraria;
 using Terraria.ModLoader;
 using ModLibsGeneral.Libraries.Tiles;
 using ModLibsTiles.Classes.Tiles.TilePattern;
-using ModLibsTiles.Libraries.Tiles.Draw;
 
 
 namespace Ergophobia.Items.HouseFramingKit {
 	public partial class HouseFramingKitItem : ModItem {
-		public static bool Validate( ref int leftTileX, ref int floorTileY, out ISet<(int, int)> tiles ) {
+		public static bool Validate(
+					ref int leftTileX,
+					ref int floorTileY,
+					out ISet<(int, int)> validTiles,
+					out ISet<(int, int)> inValidTiles ) {
+			validTiles = new HashSet<(int, int)>();
+			inValidTiles = new HashSet<(int, int)>();
+
 			int width = HouseFramingKitItem.FrameWidth;
 			int height = HouseFramingKitItem.FrameHeight;
-			var myTiles = new HashSet<(int, int)>();
 
 			int dropped = 0;
 
@@ -23,42 +28,45 @@ namespace Ergophobia.Items.HouseFramingKit {
 				dropped++;
 
 				if( floorTileY >= Main.maxTilesY ) {
-					tiles = myTiles;
 					return false;
 				}
 			}
 
 			if( dropped > height ) {
-				tiles = myTiles;
 				return false;
 			}
 
-			var outerRect = new Rectangle(
+			bool isOoB = false;
+			var rect = new Rectangle(
 				leftTileX - (width / 2),
 				floorTileY - height,
 				width,
 				height
 			);
-			int availableArea = 0;
+			
+			// Find clear tiles within area
+			for( int y=rect.Top; y<rect.Bottom; y++ ) {
+				for( int x=rect.Left; x<rect.Right; x++ ) {
+					if( !WorldGen.InWorld(x, y) ) {
+						isOoB = true;
 
-			TileDrawPrimitivesLibraries.DrawRectangle(
-				filter: TilePattern.NonActive,
-				area: outerRect,
-				hollow: null,//innerRect,
-				place: ( x, y ) => {
-					/*int timer = 50;
-					Timers.SetTimer( "HFK_"+x+"_"+y, 2, false, () => {
-						Dust.QuickDust( new Point(x, y), Color.Lime );
-						return timer-- > 0;
-					} );*/
-					myTiles.Add( (x, y) );
-					availableArea++;
-					return null;
+						continue;
+					}
+
+					if( TilePattern.NonActive.Check(x, y) ) {
+						/*int timer = 50;
+						Timers.SetTimer( "HFK_"+x+"_"+y, 2, false, () => {
+							Dust.QuickDust( new Point(x, y), Color.Lime );
+							return timer-- > 0;
+						} );*/
+						validTiles.Add( (x, y) );
+					} else {
+						inValidTiles.Add( (x, y) );
+					}
 				}
-			);
+			}
 
-			tiles = myTiles;
-			return availableArea >= (width * height);
+			return !isOoB && inValidTiles.Count == 0;
 		}
 	}
 }

@@ -57,7 +57,7 @@ namespace Ergophobia.Items.HouseFramingKit {
 			int tileY = (int)player.position.Y >> 4;
 
 			ISet<(int, int)> _;
-			bool canErect = HouseFramingKitItem.Validate( ref tileX, ref tileY, out _ );
+			bool canErect = HouseFramingKitItem.Validate( ref tileX, ref tileY, out _, out _ );
 
 			if( canErect ) {
 				if( Main.netMode == NetmodeID.SinglePlayer ) {

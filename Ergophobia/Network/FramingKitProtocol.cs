@@ -40,8 +40,7 @@ namespace Ergophobia.Network {
 		////
 
 		public override void ReceiveOnServer( int fromWho ) {
-			ISet<(int TileX, int TileY)> houseTiles;
-			bool isValid = HouseFramingKitItem.Validate( ref this.TileX, ref this.TileY, out houseTiles );
+			bool isValid = HouseFramingKitItem.Validate( ref this.TileX, ref this.TileY, out _, out _ );
 
 			if( isValid ) {
 				HouseFramingKitItem.MakeHouseFrame( this.TileX, this.TileY );

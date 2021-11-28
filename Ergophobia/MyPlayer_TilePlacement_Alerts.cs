@@ -59,14 +59,15 @@ namespace Ergophobia {
 			int tileX = (int)this.player.Center.X >> 4;
 			int tileY = (int)this.player.position.Y >> 4;
 
-			ISet<(int, int)> tiles;
-			bool canErect = HouseFramingKitItem.Validate( ref tileX, ref tileY, out tiles );
+			ISet<(int, int)> validTiles, inValidTiles;
+			bool canErect = HouseFramingKitItem.Validate( ref tileX, ref tileY, out validTiles, out inValidTiles );
 
 			Color color;
 			Vector2 pos;
-			foreach( (int x, int y) in tiles ) {
+
+			foreach( (int x, int y) in validTiles ) {
 				pos = new Vector2( (x<<4) + 8, (y<<4) + 8 );
-				color = canErect ? Color.Lime : Color.Red;
+				color = canErect ? Color.Lime : new Color( 255, 192, 0 );
 
 				Dust dust = Dust.NewDustPerfect(
 					Position: pos,
@@ -74,6 +75,21 @@ namespace Ergophobia {
 					Type: 59,
 					Alpha: 0,
 					newColor: color,
+					Scale: 1.25f
+				);
+				dust.noGravity = true;
+				dust.noLight = true;
+			}
+
+			foreach( (int x, int y) in inValidTiles ) {
+				pos = new Vector2( (x<<4) + 8, (y<<4) + 8 );
+
+				Dust dust = Dust.NewDustPerfect(
+					Position: pos,
+					Velocity: default(Vector2),
+					Type: 59,
+					Alpha: 0,
+					newColor: Color.Red,
 					Scale: 1.25f
 				);
 				dust.noGravity = true;
