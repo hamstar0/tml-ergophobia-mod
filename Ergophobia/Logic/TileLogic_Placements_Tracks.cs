@@ -45,7 +45,7 @@ namespace Ergophobia.Logic {
 
 			// Allow placing on top of solid ground
 			Tile ground = Framing.GetTileSafely( tileX, tileY + 1 );
-			if( ground.active() && Main.tileSolid[ground.type] && ground.type != TileID.MinecartTrack ) {	//are tracks solid?
+			if( ground.active() && Main.tileSolid[ground.type] && ground.type != TileID.MinecartTrack ) {
 				return true;
 			}
 
