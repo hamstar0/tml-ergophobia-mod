@@ -1,7 +1,9 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using ModLibsCore.Libraries.TModLoader.Mods;
 using Ergophobia.Recipes;
@@ -28,11 +30,22 @@ namespace Ergophobia {
 		internal IList<HouseFurnishingKitItem.OnFurnishHouse> OnPostHouseFurnish = new List<HouseFurnishingKitItem.OnFurnishHouse>();
 
 
+		////////////////
+
+		public Texture2D DisabledItemTex { get; private set; }
+
+
 
 		////////////////
 
 		public ErgophobiaMod() {
 			ErgophobiaMod.Instance = this;
+		}
+
+		public override void Load() {
+			if( Main.netMode != NetmodeID.Server && !Main.dedServ ) {
+				this.DisabledItemTex = ModContent.GetTexture( "Terraria/MapDeath" );
+			}
 		}
 
 		public override void Unload() {

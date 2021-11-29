@@ -9,18 +9,18 @@ using Ergophobia.Tiles;
 
 namespace Ergophobia.Logic {
 	static partial class TileLogic {
-		public static bool CanPlace( int type ) {
+		public static bool CanPlace( int tileType ) {
 			var config = ErgophobiaConfig.Instance;
 			var wl = config.Get<List<string>>( nameof( config.TilePlaceWhitelist ) );
 
-			if( wl.Contains( TileID.GetUniqueKey(type) ) ) {
+			if( wl.Contains( TileID.GetUniqueKey(tileType) ) ) {
 				return true;
 			}
 
-			if( type == ModContent.TileType<FramingPlankTile>() ) {
+			if( tileType == ModContent.TileType<FramingPlankTile>() ) {
 				return config.Get<bool>( nameof(config.IsFramingPlankWhitelisted) );
 			}
-			if( type == ModContent.TileType<TrackDeploymentTile>() ) {
+			if( tileType == ModContent.TileType<TrackDeploymentTile>() ) {
 				return config.Get<bool>( nameof(config.IsTrackDeploymentWhitelisted) );
 			}
 			
