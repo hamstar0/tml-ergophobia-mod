@@ -59,8 +59,13 @@ namespace Ergophobia {
 			int tileX = (int)this.player.Center.X >> 4;
 			int tileY = (int)this.player.position.Y >> 4;
 
-			ISet<(int, int)> validTiles, inValidTiles;
-			bool canErect = HouseFramingKitItem.Validate( ref tileX, ref tileY, out validTiles, out inValidTiles );
+			bool canErect = HouseFramingKitItem.Validate(
+				leftTileX: ref tileX,
+				floorTileY: ref tileY,
+				validTiles: out ISet<(int, int)> validTiles,
+				inValidTiles: out ISet<(int, int)> inValidTiles,
+				result: out _
+			);
 
 			Color color;
 			Vector2 pos;

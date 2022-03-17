@@ -40,12 +40,18 @@ namespace Ergophobia.Network {
 		////
 
 		public override void ReceiveOnServer( int fromWho ) {
-			bool isValid = HouseFramingKitItem.Validate( ref this.TileX, ref this.TileY, out _, out _ );
+			bool isValid = HouseFramingKitItem.Validate(
+				ref this.TileX,
+				ref this.TileY,
+				out _,
+				out _,
+				out string result
+			);
 
 			if( isValid ) {
 				HouseFramingKitItem.MakeHouseFrame( this.TileX, this.TileY );
 			} else {
-				LogLibraries.Alert( "Could not place house frame" );
+				LogLibraries.Alert( "Could not place house frame: "+result );
 			}
 		}
 

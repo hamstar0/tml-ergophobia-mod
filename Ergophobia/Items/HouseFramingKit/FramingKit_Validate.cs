@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
+using ModLibsCore.Libraries.Debug;
 using ModLibsGeneral.Libraries.Tiles;
-using ModLibsTiles.Classes.Tiles.TilePattern;
 
 
 namespace Ergophobia.Items.HouseFramingKit {
@@ -13,12 +13,15 @@ namespace Ergophobia.Items.HouseFramingKit {
 					ref int leftTileX,
 					ref int floorTileY,
 					out ISet<(int, int)> validTiles,
-					out ISet<(int, int)> inValidTiles ) {
+					out ISet<(int, int)> inValidTiles,
+					out string result ) {
 			validTiles = new HashSet<(int, int)>();
-			inValidTiles = new HashSet<(int, int)>();
+			var badTiles = new List<(int, int)>();	// <- Solves a "bug" I can't figure out?
 
 			int width = HouseFramingKitItem.FrameWidth;
 			int height = HouseFramingKitItem.FrameHeight;
+
+			//
 
 			int dropped = 0;
 
@@ -28,13 +31,21 @@ namespace Ergophobia.Items.HouseFramingKit {
 				dropped++;
 
 				if( floorTileY >= Main.maxTilesY ) {
+					inValidTiles = new HashSet<(int, int)>();
+					result = "Floor not found.";
+
 					return false;
 				}
 			}
 
 			if( dropped > height ) {
+				inValidTiles = new HashSet<(int, int)>();
+				result = "Floor too low.";
+
 				return false;
 			}
+
+			//
 
 			bool isOoB = false;
 			var rect = new Rectangle(
@@ -53,20 +64,43 @@ namespace Ergophobia.Items.HouseFramingKit {
 						continue;
 					}
 
-					if( TilePattern.NonActive.Check(x, y) ) {
+					if( Main.tile[x, y].active() == true ) {
+						badTiles.Add( (x, y) );
+					} else {
 						/*int timer = 50;
 						Timers.SetTimer( "HFK_"+x+"_"+y, 2, false, () => {
 							Dust.QuickDust( new Point(x, y), Color.Lime );
 							return timer-- > 0;
 						} );*/
 						validTiles.Add( (x, y) );
-					} else {
-						inValidTiles.Add( (x, y) );
 					}
 				}
 			}
 
-			return !isOoB && inValidTiles.Count == 0;
+			inValidTiles = new HashSet<(int, int)>( badTiles );
+
+			//
+
+			if( isOoB ) {
+				result = "Out of bounds.";
+
+				return false;
+			}
+			
+//if( SPECIAL ) {
+//LogLibraries.Log(
+//	$"invalid tiles {inValidTiles.Count} vs {validTiles.Count},"
+//	+$" {inValidTiles.GetHashCode()} vs {validTiles.GetHashCode()}"
+//);
+//}
+			if( badTiles.Count != 0 ) {
+				result = "Invalid tiles within build space.";
+
+				return false;
+			}
+
+			result = "Success.";
+			return true;
 		}
 	}
 }
