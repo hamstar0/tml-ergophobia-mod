@@ -87,7 +87,7 @@ namespace Ergophobia.Items.ScaffoldingKit {
 				if( Main.netMode == NetmodeID.SinglePlayer ) {
 					ScaffoldingErectorKitItem.MakeScaffold( area.Left, area.Bottom + offsetY );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
-					ScaffoldingKitProtocol.SendToServer( tileX, tileY, offsetY );
+					ScaffoldingKitProtocol.BroadcastFromClientToEveryone( tileX, tileY, offsetY );
 				} else if( Main.netMode == NetmodeID.Server ) {
 					LogLibraries.Alert( "Server?" );
 				}

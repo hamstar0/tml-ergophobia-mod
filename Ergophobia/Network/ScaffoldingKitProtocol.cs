@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
-using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Classes.Errors;
+using ModLibsCore.Libraries.Debug;
 using ModLibsCore.Services.Network.SimplePacket;
 using Ergophobia.Items.ScaffoldingKit;
 
@@ -11,8 +11,12 @@ using Ergophobia.Items.ScaffoldingKit;
 namespace Ergophobia.Network {
 	[Serializable]
 	class ScaffoldingKitProtocol : SimplePacketPayload {
-		public static void SendToServer( int placeAtTileX, int placeAtTileY, int offsetTileY ) {
-			if( Main.netMode != NetmodeID.MultiplayerClient ) { throw new ModLibsException( "Not client" ); }
+		public static void BroadcastFromClientToEveryone( int placeAtTileX, int placeAtTileY, int offsetTileY ) {
+			if( Main.netMode != NetmodeID.MultiplayerClient ) {
+				throw new ModLibsException( "Not client" );
+			}
+
+			//
 
 			var packet = new ScaffoldingKitProtocol(  placeAtTileX, placeAtTileY, offsetTileY );
 
@@ -51,7 +55,7 @@ namespace Ergophobia.Network {
 			);
 
 			if( isValid ) {
-				ScaffoldingErectorKitItem.MakeScaffold( area.Left, area.Bottom );
+				ScaffoldingErectorKitItem.MakeScaffold( area.Left, area.Bottom + this.OffsetTileY );
 			} else {
 				LogLibraries.Alert( "Could not place house frame" );
 			}
