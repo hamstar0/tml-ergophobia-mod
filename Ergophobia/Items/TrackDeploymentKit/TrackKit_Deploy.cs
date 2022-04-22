@@ -66,7 +66,7 @@ Timers.SetTimer( "blah_"+resume.x+"_"+resume.y, 3, false, () => {
 	return blah-- > 0;
 } );*/
 
-			if( Main.netMode == 0 ) {
+			if( Main.netMode == NetmodeID.SinglePlayer ) {
 				return TrackDeploymentKitItem.Deploy( fromPlayerWho, resume.x, resume.y, resume.dir > 0 );
 			} else {
 				TrackKitDeployProtocol.SendToServer( resume.dir > 0, resume.x, resume.y, true );
@@ -106,7 +106,7 @@ Timers.SetTimer( "blah_"+resume.x+"_"+resume.y, 3, false, () => {
 			if( Main.tile[x, y]?.type != TileID.MinecartTrack ) {
 				TrackDeploymentKitItem.PlaceTrack( x, y );
 
-				if( Main.netMode == 2 ) {
+				if( Main.netMode == NetmodeID.Server ) {
 					//NetMessage.SendTileSquare( -1, x, y, 1 );
 					TrackKitTileProtocol.SendToClients( x, y );
 				}
@@ -114,9 +114,9 @@ Timers.SetTimer( "blah_"+resume.x+"_"+resume.y, 3, false, () => {
 				if( isLastTrack && isNotAborted ) {
 					(int x, int y) lastPathNode = path[trackNum + 1];
 
-					if( Main.netMode == 0 ) {
+					if( Main.netMode == NetmodeID.SinglePlayer ) {
 						TrackDeploymentKitItem.PlaceResumePoint( lastPathNode.x, lastPathNode.y, isAimedRight );
-					} else if( Main.netMode == 2 ) {
+					} else if( Main.netMode == NetmodeID.Server ) {
 						TrackKitResumeProtocol.SendToClient( fromPlayerWho, lastPathNode.x, lastPathNode.y, isAimedRight );
 					}
 				}
@@ -166,7 +166,7 @@ Timers.SetTimer( "blah_"+resume.x+"_"+resume.y, 3, false, () => {
 					WorldGen.PlaceWall( tileX, y, WallID.RichMahoganyFence );
 				}
 
-				if( Main.netMode != 0 ) {
+				if( Main.netMode != NetmodeID.SinglePlayer ) {
 					NetMessage.SendTileSquare( -1, tileX, y, 1 );
 				}
 			}
@@ -181,7 +181,7 @@ Timers.SetTimer( "blah_"+resume.x+"_"+resume.y, 3, false, () => {
 				itemWho = Item.NewItem( new Vector2((tileX<<4) + 8, (tileY<<4) + 8), ItemID.MinecartTrack, leftovers );
 			}
 
-			if( Main.netMode != 0 ) {
+			if( Main.netMode != NetmodeID.SinglePlayer ) {
 				if( itemWho != -1 ) {
 					NetMessage.SendData( MessageID.SyncItem, -1, -1, null, itemWho, 1f );
 				}

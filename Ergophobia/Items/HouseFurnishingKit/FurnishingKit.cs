@@ -58,7 +58,7 @@ namespace Ergophobia.Items.HouseFurnishingKit {
 			this.item.width = HouseFurnishingKitItem.Width;
 			this.item.height = HouseFurnishingKitItem.Height;
 			this.item.consumable = true;
-			this.item.useStyle = 4;
+			this.item.useStyle = ItemUseStyleID.HoldingUp;
 			this.item.useTime = 30;
 			this.item.useAnimation = 30;
 			//this.item.UseSound = SoundID.Item108;
